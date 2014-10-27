@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+
+<!-- only load the mobile lib "sap.m", sap.ui.commons and the "sap_bluecrystal" theme -->
+<script
+	src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
+	id="sap-ui-bootstrap" data-sap-ui-libs="sap.m, sap.ui.commons"
+	data-sap-ui-theme="sap_bluecrystal">
+	
+</script>
+
+<!--jQuery UI Dragging Feature: Scrum Cards-->
+<script type="text/javascript">
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-core');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-widget');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-mouse');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-draggable');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-droppable');
+</script>
+
+<!--Utilities-->
+<script src="util/jquery.base64.js"></script>
+<script src="util/soapRequest.js"></script>
+<script src="util/soapTemplate.js"></script>
+
+
+<script>
+	//TODO In einzelne Dateien auslagern
+	var options = {
+		user : 'jam',
+		pass : 'Nlcfwv3',
+		server : 'http://abat-ecs.bremen.abat.de',
+		port : '8000',
+		getKunden : '/sap/bc/srt/rfc/sap/z_mgu_read_kunden/800/z_mgu_service/z_mgu_bind',
+		getProjekte : '/sap/bc/srt/rfc/sap/z_mgu_read_projekte/800/z_mgu_bind2/z_mgu_bind_pro',
+		getSprints : '/sap/bc/srt/rfc/sap/z_mgu_read_sprints2/800/z_mgu_read_sprint/z_mgu_sprint',
+		getAufgaben : '/sap/bc/srt/rfc/sap/z_mgu_read_sprints3/800/z_mgu_sprints_4/z_mgu_sprints_4',
+		url : function(service) {
+			return this.server + ":" + this.port + service;
+		},
+		base64 : function() {
+			return $.base64.encode(this.user + ":" + this.pass);
+		}
+	};
+
+	sap.ui.localResources("scrumui5");
+	var oSplitApp = new sap.m.SplitApp();
+
+	var masterPageKunden = sap.ui.view({
+		id : "masterPageKunden",
+		viewName : "scrumui5.masterPageKunden",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	var masterPageProjekte = sap.ui.view({
+		id : "masterPageProjekte",
+		viewName : "scrumui5.masterPageProjekte",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	var masterPageSprints = sap.ui.view({
+		id : "masterPageSprints",
+		viewName : "scrumui5.masterPageSprints",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	var oDetailPage1 = sap.ui.view({
+		id : "idscrumBoard1",
+		viewName : "scrumui5.scrumBoard",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	oSplitApp.addMasterPage(masterPageKunden);
+	oSplitApp.addMasterPage(masterPageProjekte);
+	oSplitApp.addMasterPage(masterPageSprints);
+	oSplitApp.addDetailPage(oDetailPage1);
+
+	oSplitApp.setInitialMaster("masterPageKunden");
+	oSplitApp.placeAt("content");
+</script>
+
+</head>
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
+</html>
