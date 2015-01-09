@@ -30,11 +30,16 @@ sap.ui.controller("scrumui5.scrumBoard", {
 	 * @memberOf scrumui5.scrumBoard
 	 */
 	onAfterRendering : function() {
-		$(".sapMTile").draggable({
-			helper : "clone", // TODO use function to drag custom copy
-			axis: "x",
-			containment: ".sapUiMlt"
-		});
+//		$("#__list3-listUl, #__list4-listUl").sortable({
+//			connectWith : ".sapMListUl"
+//		}).disableSelection();
+//		$(".sapMListNoData").sortable( "disable" );
+		 
+//		$(".sapMTile").draggable({
+//			helper : "clone", // TODO use function to drag custom copy
+//			axis: "x",
+//			containment: ".sapUiMlt"
+//		});
 	}
 /**
  * Called when the Controller is destroyed. Use this one to free resources and

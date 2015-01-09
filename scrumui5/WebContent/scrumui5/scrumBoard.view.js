@@ -20,20 +20,58 @@ sap.ui.jsview("scrumui5.scrumBoard", {
 	 */
 	createContent : function(oController) {
 
-		var matrixLayout = new sap.ui.commons.layout.MatrixLayout({});
-		var toolBar1 = new sap.m.StandardTile({
-			title : "TMC Bearbeitung Aufgabenteile",
-			info : "Oliver Henning",
-			number : 3602,
-			id:"toolbar"
+		//		var toolBar1 = new sap.m.StandardTile({
+		//			title : "TMC Bearbeitung Aufgabenteile",
+		//			info : "Oliver Henning",
+		//			number : 3602,
+		//			id:"toolbar1"
+		//		});
+
+		oKundenModel = new sap.ui.model.odata.ODataModel("http://abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/");
+
+		var kundenTemplate = new sap.m.StandardListItem({
+			title : "{Kunde}"
 		});
-//		
+
+		var layout = new sap.ui.layout.HorizontalLayout();
+
+		var items = {
+			path : "/Kunde/",
+			template : kundenTemplate
+		}
+
+		var items2 = {
+			path : "/Kunde/",
+			template : kundenTemplate
+		}
+
+		var oList1 = new sap.m.List({
+			headerText : "In Bearbeitung",
+			items : items
+		});
+
+		var oList2 = new sap.m.List({
+			headerText : "Done",
+			items : items2
+		}).setModel(oKundenModel);
+
+		layout.addContent(oList1);
+		layout.addContent(oList2);
+
+		// Konflikt mit BusyIndicator
+		oList2.onAfterRendering = function() {
+			$("#__list3-listUl, #__list4-listUl").sortable({
+				connectWith : ".sapMListUl"
+			}).disableSelection();
+			this.setBusy(false);
+		}
+
 		// TODO Model, Datum, draggable
-		matrixLayout.createRow(toolBar1, "Zweiter");
+		// TDOD Titel: Kunde/Projekt/Sprint
 
 		return new sap.m.Page({
 			title : "scrumUI5",
-			content : matrixLayout
+			content : layout
 		});
 	}
 

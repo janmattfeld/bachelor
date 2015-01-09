@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />     
+
+<script type="text/javascript" src="cordova.js"></script>   
 
 <!-- only load the mobile lib "sap.m", sap.ui.commons and the "sap_bluecrystal" theme -->
 <script
 	src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
 	id="sap-ui-bootstrap" data-sap-ui-libs="sap.m, sap.ui.commons"
-	data-sap-ui-theme="sap_bluecrystal">
-	
+	data-sap-ui-theme="sap_bluecrystal">	
 </script>
 
 <!--jQuery UI Dragging Feature: Scrum Cards-->
@@ -19,6 +21,7 @@
 	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-mouse');
 	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-draggable');
 	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-droppable');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-sortable');
 </script>
 
 <!--Utilities-->
