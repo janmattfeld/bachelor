@@ -26,30 +26,29 @@
 
 <!--Utilities-->
 <script src="util/jquery.base64.js"></script>
-<script src="util/soapRequest.js"></script>
-<script src="util/soapTemplate.js"></script>
-
 
 <script>
 	//TODO In einzelne Dateien auslagern
-	var options = {
-		user : 'jam',
-		pass : 'Nlcfwv3',
-		server : 'http://abat-ecs.bremen.abat.de',
-		port : '8000',
-		getKunden : '/sap/bc/srt/rfc/sap/z_mgu_read_kunden/800/z_mgu_service/z_mgu_bind',
-		getProjekte : '/sap/bc/srt/rfc/sap/z_mgu_read_projekte/800/z_mgu_bind2/z_mgu_bind_pro',
-		getSprints : '/sap/bc/srt/rfc/sap/z_mgu_read_sprints2/800/z_mgu_read_sprint/z_mgu_sprint',
-		getAufgaben : '/sap/bc/srt/rfc/sap/z_mgu_read_sprints3/800/z_mgu_sprints_4/z_mgu_sprints_4',
-		url : function(service) {
-			return this.server + ":" + this.port + service;
+	var connection = {
+		USER : 'jam',
+		PASS : 'Nlcfwv3',
+		SERVER : 'http://abat-ect.bremen.abat.de',
+		PORT : '8000',
+		ODATA: '/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/',
+		getUrl : function() {
+			return this.SERVER + ":" + this.PORT + this.ODATA;
 		},
-		base64 : function() {
-			return $.base64.encode(this.user + ":" + this.pass);
+		getBase64 : function() {
+			return $.base64.encode(this.USER + ":" + this.PASS);
 		}
 	};
 
 	sap.ui.localResources("scrumui5");
+	
+	// TODO register models in index/app controller
+	scrumui5Model = new sap.ui.model.odata.ODataModel(connection.getUrl());
+	sap.ui.getCore().setModel(scrumui5Model);
+	
 	var oSplitApp = new sap.m.SplitApp();
 
 	var masterPageKunden = sap.ui.view({

@@ -27,8 +27,6 @@ sap.ui.jsview("scrumui5.scrumBoard", {
 		//			id:"toolbar1"
 		//		});
 
-		oKundenModel = new sap.ui.model.odata.ODataModel("http://abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/");
-
 		var kundenTemplate = new sap.m.StandardListItem({
 			title : "{Kunde}"
 		});
@@ -53,7 +51,7 @@ sap.ui.jsview("scrumui5.scrumBoard", {
 		var oList2 = new sap.m.List({
 			headerText : "Done",
 			items : items2
-		}).setModel(oKundenModel);
+		});
 
 		layout.addContent(oList1);
 		layout.addContent(oList2);
