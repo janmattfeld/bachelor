@@ -12,7 +12,7 @@
         <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" android:excludeFromRecents="true" android:name="com.sap.smp.client.httpc.authflows.SAML2AuthActivity" />
     </application>
     <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.sap.mobile.clientHub.CLIENTHUB_ACCESS_PERMISSION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

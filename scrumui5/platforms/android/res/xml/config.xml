@@ -1,18 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="de.abat.scrumui5" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
-    <name>HelloCordova</name>
+    <name>ScrumUI5</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Scrum Board using SAP SAPUI5 and Mobile Platform Services.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="jam@abat.de" href="http://abat.de">
+        abat AG
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <feature name="NetworkStatus">
-        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
-    </feature>
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
@@ -29,5 +26,8 @@
     </feature>
     <feature name="OData">
         <param name="android-package" value="com.sap.mp.cordova.plugins.odata.OData" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
 </widget>

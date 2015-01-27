@@ -1,41 +1,91 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+<head>
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />     
+
+<script type="text/javascript" src="cordova.js"></script>   
+
+<!-- only load the mobile lib "sap.m", sap.ui.commons and the "sap_bluecrystal" theme -->
+<script
+	src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
+	id="sap-ui-bootstrap" data-sap-ui-libs="sap.m, sap.ui.commons"
+	data-sap-ui-theme="sap_bluecrystal">	
+</script>
+
+<!--jQuery UI Dragging Feature: Scrum Cards-->
+<script type="text/javascript">
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-core');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-widget');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-mouse');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-draggable');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-droppable');
+	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-sortable');
+</script>
+
+<!--Utilities-->
+<script src="util/jquery.base64.js"></script>
+
+<script>
+	//TODO In einzelne Dateien auslagern
+	var connection = {
+		USER : 'jam',
+		PASS : 'Nlcfwv3',
+		SERVER : 'http://abat-ect.bremen.abat.de',
+		PORT : '8000',
+		ODATA: '/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/',
+		getUrl : function() {
+			return this.SERVER + ":" + this.PORT + this.ODATA;
+		},
+		getBase64 : function() {
+			return $.base64.encode(this.USER + ":" + this.PASS);
+		}
+	};
+
+	sap.ui.localResources("scrumui5");
+	
+	// TODO register models in index/app controller
+	scrumui5Model = new sap.ui.model.odata.ODataModel(connection.getUrl());
+	sap.ui.getCore().setModel(scrumui5Model);
+	
+	var oSplitApp = new sap.m.SplitApp();
+
+	var masterPageKunden = sap.ui.view({
+		id : "masterPageKunden",
+		viewName : "scrumui5.masterPageKunden",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	var masterPageProjekte = sap.ui.view({
+		id : "masterPageProjekte",
+		viewName : "scrumui5.masterPageProjekte",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	var masterPageSprints = sap.ui.view({
+		id : "masterPageSprints",
+		viewName : "scrumui5.masterPageSprints",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	var oDetailPage1 = sap.ui.view({
+		id : "idscrumBoard1",
+		viewName : "scrumui5.scrumBoard",
+		type : sap.ui.core.mvc.ViewType.JS
+	});
+
+	oSplitApp.addMasterPage(masterPageKunden);
+	oSplitApp.addMasterPage(masterPageProjekte);
+	oSplitApp.addMasterPage(masterPageSprints);
+	oSplitApp.addDetailPage(oDetailPage1);
+
+	oSplitApp.setInitialMaster("masterPageKunden");
+	oSplitApp.placeAt("content");
+</script>
+
+</head>
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
 </html>
