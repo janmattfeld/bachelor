@@ -28,60 +28,62 @@
 <script src="util/jquery.base64.js"></script>
 
 <script>
-	//TODO In einzelne Dateien auslagern
-	var connection = {
-		USER : 'jam',
-		PASS : 'Nlcfwv3',
-		SERVER : 'jam:Nlcfwv3@http://abat-ect.bremen.abat.de',
-		PORT : '8000',
-		ODATA: '/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/',
-		getUrl : function() {
-			return this.SERVER + ":" + this.PORT + this.ODATA;
-		},
-		getBase64 : function() {
-			return $.base64.encode(this.USER + ":" + this.PASS);
-		}
-	};
-
-	sap.ui.localResources("scrumui5");
+	document.addEventListener("deviceready", function() {
+		//TODO In einzelne Dateien auslagern
+		var connection = {
+			USER : 'jam',
+			PASS : 'Nlcfwv3',
+			SERVER : 'jam:Nlcfwv3@http://abat-ect.bremen.abat.de',
+			PORT : '8000',
+			ODATA: '/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/',
+			getUrl : function() {
+				return this.SERVER + ":" + this.PORT + this.ODATA;
+			},
+			getBase64 : function() {
+				return $.base64.encode(this.USER + ":" + this.PASS);
+			}
+		};
 	
-	// TODO register models in index/app controller
-	scrumui5Model = new sap.ui.model.odata.ODataModel(connection.getUrl());
-	sap.ui.getCore().setModel(scrumui5Model);
+		sap.ui.localResources("scrumui5");
+		
+		// TODO register models in index/app controller
+		scrumui5Model = new sap.ui.model.odata.ODataModel(connection.getUrl());
+		sap.ui.getCore().setModel(scrumui5Model);
+		
+		var oSplitApp = new sap.m.SplitApp();
 	
-	var oSplitApp = new sap.m.SplitApp();
-
-	var masterPageKunden = sap.ui.view({
-		id : "masterPageKunden",
-		viewName : "scrumui5.masterPageKunden",
-		type : sap.ui.core.mvc.ViewType.JS
-	});
-
-	var masterPageProjekte = sap.ui.view({
-		id : "masterPageProjekte",
-		viewName : "scrumui5.masterPageProjekte",
-		type : sap.ui.core.mvc.ViewType.JS
-	});
-
-	var masterPageSprints = sap.ui.view({
-		id : "masterPageSprints",
-		viewName : "scrumui5.masterPageSprints",
-		type : sap.ui.core.mvc.ViewType.JS
-	});
-
-	var oDetailPage1 = sap.ui.view({
-		id : "idscrumBoard1",
-		viewName : "scrumui5.scrumBoard",
-		type : sap.ui.core.mvc.ViewType.JS
-	});
-
-	oSplitApp.addMasterPage(masterPageKunden);
-	oSplitApp.addMasterPage(masterPageProjekte);
-	oSplitApp.addMasterPage(masterPageSprints);
-	oSplitApp.addDetailPage(oDetailPage1);
-
-	oSplitApp.setInitialMaster("masterPageKunden");
-	oSplitApp.placeAt("content");
+		var masterPageKunden = sap.ui.view({
+			id : "masterPageKunden",
+			viewName : "scrumui5.masterPageKunden",
+			type : sap.ui.core.mvc.ViewType.JS
+		});
+	
+		var masterPageProjekte = sap.ui.view({
+			id : "masterPageProjekte",
+			viewName : "scrumui5.masterPageProjekte",
+			type : sap.ui.core.mvc.ViewType.JS
+		});
+	
+		var masterPageSprints = sap.ui.view({
+			id : "masterPageSprints",
+			viewName : "scrumui5.masterPageSprints",
+			type : sap.ui.core.mvc.ViewType.JS
+		});
+	
+		var oDetailPage1 = sap.ui.view({
+			id : "idscrumBoard1",
+			viewName : "scrumui5.scrumBoard",
+			type : sap.ui.core.mvc.ViewType.JS
+		});
+	
+		oSplitApp.addMasterPage(masterPageKunden);
+		oSplitApp.addMasterPage(masterPageProjekte);
+		oSplitApp.addMasterPage(masterPageSprints);
+		oSplitApp.addDetailPage(oDetailPage1);
+	
+		oSplitApp.setInitialMaster("masterPageKunden");
+		oSplitApp.placeAt("content");
+	}, false);
 </script>
 
 </head>
