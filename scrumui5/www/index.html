@@ -29,6 +29,9 @@
 
 <script>
 	document.addEventListener("deviceready", function() {
+		window.wizUniqueIdentifier.get(function(uuid){
+			alert(uuid);
+		});
 		//TODO In einzelne Dateien auslagern
 		var connection = {
 			USER : 'jam',
