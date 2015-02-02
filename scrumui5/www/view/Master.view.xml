@@ -24,10 +24,10 @@
 			<PullToRefresh
 				id="pullToRefresh"
 				visible="{device>/isTouch}"
-				refresh="handleRefresh" />
+				refresh="onRefresh" />
 			<List
 				id="list"
-				items="{/Kunden}"
+				items="{/Categories}"
 				mode="{device>/listMode}"
 				noDataText="{i18n>masterListNoDataText}"
 				select="onSelect"
@@ -37,7 +37,7 @@
 					<ObjectListItem
 						type="{device>/listItemType}"
 						press="onSelect"
-						title="{Bezei}">
+						title="{Name}">
 					</ObjectListItem>
 				</items>
 			</List>

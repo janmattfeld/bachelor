@@ -46,13 +46,26 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master", {
 		var filters = [];
 		var searchString = this.getView().byId("searchField").getValue();
 		if (searchString && searchString.length > 0) {
-			filters = [ new sap.ui.model.Filter("Name", sap.ui.model.FilterOperator.Contains, searchString) ];
+			filters = [ new sap.ui.model.Filter("Bezei", sap.ui.model.FilterOperator.Contains, searchString) ];
 		}
 
 		// Update list binding
 		this.getView().byId("list").getBinding("items").filter(filters);
 	},
-	
+
+	onRefresh : function(oEvent) {
+		var that = this;
+		// Trigger search again and hide pullToRefresh when data ready
+		var oProductList = this.getView().byId("list");
+		var oBinding = oProductList.getBinding("items");
+		var fnHandler = function() {
+			that.getView().byId("pullToRefresh").hide();
+			oBinding.detachDataReceived(fnHandler);
+		};
+		oBinding.attachDataReceived(fnHandler);
+		this.onSearch();
+	},
+
 	onNavBack : function() {
 		// This is only relevant when running on phone devices
 		this.getRouter().myNavBack("main");
