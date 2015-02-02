@@ -1,96 +1,74 @@
 <!DOCTYPE HTML>
+<!-- Copyright (c) 2015 abat AG, All Rights Reserved -->
 <html>
-<head>
-<meta name="format-detection" content="telephone=no" />
-<meta name="msapplication-tap-highlight" content="no" />
-<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />     
-
-<script type="text/javascript" src="cordova.js"></script>
-
-<!-- only load the mobile lib "sap.m", sap.ui.commons and the "sap_bluecrystal" theme -->
-<script
-	src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
-	id="sap-ui-bootstrap" data-sap-ui-libs="sap.m, sap.ui.commons"
-	data-sap-ui-theme="sap_bluecrystal">	
-</script>
-
-<!--jQuery UI Dragging Feature: Scrum Cards-->
-<script type="text/javascript">
-	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-core');
-	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-widget');
-	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-mouse');
-	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-draggable');
-	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-droppable');
-	$.sap.require('sap.ui.thirdparty.jqueryui.jquery-ui-sortable');
-</script>
-
-<!--Utilities-->
-<script src="util/jquery.base64.js"></script>
-
-<script>
-	document.addEventListener("deviceready", function() {
-		window.wizUniqueIdentifier.get(function(uuid){
-			alert(uuid);
-		});
-		//TODO In einzelne Dateien auslagern
-		var connection = {
-			USER : 'jam',
-			PASS : 'Nlcfwv3',
-			SERVER : 'http://jam:Nlcfwv3@abat-ect.bremen.abat.de',
-			PORT : '8000',
-			ODATA: '/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/',
-			getUrl : function() {
-				return this.SERVER + ":" + this.PORT + this.ODATA;
-			},
-			getBase64 : function() {
-				return $.base64.encode(this.USER + ":" + this.PASS);
-			}
-		};
-	
-		sap.ui.localResources("scrumui5");
+	<head>
+		<!-- 
+			SAPUI5 Guide Defaults:
+			- Prevent Internet Explorer Compatibility Mode.
+			- Use UTF-8 in all App components.
+		 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">		
+		<!-- 
+			Cordova Defaults:
+			- Disables automatic detection of possible phone numbers in Safari on iOS.
+			- Disables touch tap link highlighting on 
+				both IE11 on Windows 8.1 and Internet Explorer 10 on Windows Phone 8.
+		 -->
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		<!-- 
+			WARNING: for iOS 7, remove the width=device-width 
+				and height=device-height attributes.
+			See https://issues.apache.org/jira/browse/CB-4323
+			ALSO: "target-densitydpi=device-dpi" is deprecated
+		-->
+		<meta name="viewport" content="user-scalable=no, initial-scale=1,
+			maximum-scale=1, minimum-scale=1, width=device-width, 
+			height=device-height" />
 		
-		// TODO register models in index/app controller
-		scrumui5Model = new sap.ui.model.odata.ODataModel(connection.getUrl());
-		sap.ui.getCore().setModel(scrumui5Model);
+		<!-- Title only shown when acessed via Browser -->
+		<title>abat ScrumUI5</title>
 		
-		var oSplitApp = new sap.m.SplitApp();
-	
-		var masterPageKunden = sap.ui.view({
-			id : "masterPageKunden",
-			viewName : "scrumui5.masterPageKunden",
-			type : sap.ui.core.mvc.ViewType.JS
-		});
-	
-		var masterPageProjekte = sap.ui.view({
-			id : "masterPageProjekte",
-			viewName : "scrumui5.masterPageProjekte",
-			type : sap.ui.core.mvc.ViewType.JS
-		});
-	
-		var masterPageSprints = sap.ui.view({
-			id : "masterPageSprints",
-			viewName : "scrumui5.masterPageSprints",
-			type : sap.ui.core.mvc.ViewType.JS
-		});
-	
-		var oDetailPage1 = sap.ui.view({
-			id : "idscrumBoard1",
-			viewName : "scrumui5.scrumBoard",
-			type : sap.ui.core.mvc.ViewType.JS
-		});
-	
-		oSplitApp.addMasterPage(masterPageKunden);
-		oSplitApp.addMasterPage(masterPageProjekte);
-		oSplitApp.addMasterPage(masterPageSprints);
-		oSplitApp.addDetailPage(oDetailPage1);
-	
-		oSplitApp.setInitialMaster("masterPageKunden");
-		oSplitApp.placeAt("content");
-	}, false);
-</script>
-
-</head>
-<body class="sapUiBody" role="application">
-	<div id="content"></div>
-</body>
+		<!-- Load Apache Cordova -->
+		<!-- <script src="cordova.js"></script> -->
+		
+		<!-- SAPUI5 Bootstrap
+			- Use local resources (disable preload) for faster app startup instead of
+				src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"				
+			- Running SAPUI5 Mobile Apps in Hybrid Web Containers:
+				https://sapui5.hana.ondemand.com/sdk/#docs/guide/
+					293eb945f0e945aaa776812481b4c533.html
+		-->
+		<script
+			id="sap-ui-bootstrap"
+			src="./resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_bluecrystal"
+			data-sap-ui-preload=""
+			data-sap-ui-resourceroots='{
+				"de.abat.scrumui5": "./"
+			}'>
+		</script>		
+		<!-- 
+			- Start App in Shell for correct vertical margins on widescreens
+			- Instantiate Component for reuse in different environments like Fiori
+				-> see Component.js for details
+			- WARNING: Ajax calls do not work prior to Cordova's deviceready event
+				-> enable deviceready event listener in hybrid apps
+		-->
+		<script>
+			//document.addEventListener("deviceready", function() {
+				sap.ui.getCore().attachInit(function() {
+			        new sap.m.Shell({
+			            app: new sap.ui.core.ComponentContainer({
+			                height : "100%",
+			                name : "de.abat.scrumui5"
+			            })
+			        }).placeAt("content");
+			     })
+			//}, false);		    
+		</script>
+	</head>
+	<body class="sapUiBody" id="content" />
 </html>
