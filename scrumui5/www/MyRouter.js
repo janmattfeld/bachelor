@@ -54,7 +54,7 @@ sap.ui.core.routing.Router.extend("de.abat.scrumui5.MyRouter", {
 	},
 	
 	_findSplitApp : function(oControl) {
-		sAncestorControlName = "idAppControl";
+		var sAncestorControlName = "idAppControl";
 		if (oControl instanceof sap.ui.core.mvc.View && oControl.byId(sAncestorControlName)) {
 			return oControl.byId(sAncestorControlName);
 		}
