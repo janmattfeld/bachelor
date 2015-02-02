@@ -1,0 +1,49 @@
+<mvc:View
+	controllerName="de.abat.scrumui5.view.Master"
+	displayBlock="true"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<Page
+		id="page"
+		title="{i18n>master2Title}"
+		showNavButton="true"
+		navButtonText="{i18n>master2NavButtonText}"
+		navButtonPress="onNavBack">
+		<subHeader>
+			<Bar id="searchBar">
+				<contentMiddle>
+					<SearchField
+						id="searchField"
+						showRefreshButton="{device>/isNoTouch}"
+						placeholder="{i18n>master2SearchPlaceholder}"
+						search="onSearch"
+						tooltip="{i18n>master2SearchTooltip}"
+						width="100%">
+					</SearchField>
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		<content>
+			<PullToRefresh
+				id="pullToRefresh"
+				visible="{device>/isTouch}"
+				refresh="handleRefresh" />
+			<List
+				id="list"
+				items="{/Projekte}"
+				mode="{device>/listMode}"
+				noDataText="{i18n>master2ListNoDataText}"
+				select="onSelect"
+				growing="true"
+				growingScrollToLoad="true">
+				<items>
+					<ObjectListItem
+						type="{device>/listItemType}"
+						press="onSelect"
+						title="{Bezei}">
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</mvc:View>
