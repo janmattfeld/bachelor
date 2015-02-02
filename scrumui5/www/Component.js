@@ -52,7 +52,7 @@ sap.ui.core.UIComponent.extend("de.abat.scrumui5.Component", {
 			resourceBundle : "i18n/messageBundle.properties",
 			serviceConfig : {
 				name : "Z_ZAV_KUNDE_SAPUI5",
-				serviceUrl : "http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_KUNDE_SAPUI5_SRV/"
+				serviceUrl : "http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/"
 			}
 		},
 
@@ -73,14 +73,14 @@ sap.ui.core.UIComponent.extend("de.abat.scrumui5.Component", {
 				targetAggregation : "masterPages",
 				targetControl : "idAppControl",
 				subroutes : [ {
-					pattern : "Kunde/{Kunde}",
+					pattern : "Kunden/toProjekte",
 					name : "master2",
 					view : "Master2",
 					viewLevel : 2,
 					targetAggregation : "masterPages"
 				} ]
 			}, {
-				pattern : "Kunde/{Kunde}/Projekte/{Projekt}",
+				pattern : "Kunden/{Kunde}/Projekte/{Projekt}",
 				name : "master3",
 				view : "Master3",
 				viewLevel : 3,

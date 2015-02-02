@@ -30,7 +30,7 @@ sap.ui.jsview("scrumui5.masterPageKunden", {
 			title : "Kunden",
 			content : [ new sap.m.List({
 				items : {
-					path : "/Kunde/",
+					path : "/Kunden/",
 					template : kundenTemplate
 				}
 			})]

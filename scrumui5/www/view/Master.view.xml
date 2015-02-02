@@ -27,7 +27,7 @@
 				refresh="handleRefresh" />
 			<List
 				id="list"
-				items="{/Kunde}"
+				items="{/Kunden}"
 				mode="{device>/listMode}"
 				noDataText="{i18n>masterListNoDataText}"
 				select="onSelect"
