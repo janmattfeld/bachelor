@@ -81,7 +81,6 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master", {
 
 	showDetail : function(oItem) {
 		// If we're on a phone device, include nav in history
-		console.log(oItem.getBindingContext().getPath().substr(1));
 		var bReplace = jQuery.device.is.phone ? false : true;
 		this.getRouter().navTo("master2", {
 			from : "main",

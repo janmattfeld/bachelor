@@ -27,7 +27,7 @@
 				refresh="onRefresh" />
 			<List
 				id="list"
-				items="{/Categories}"
+				items="{/Kunden}"
 				mode="{device>/listMode}"
 				noDataText="{i18n>masterListNoDataText}"
 				select="onSelect"
@@ -37,7 +37,7 @@
 					<ObjectListItem
 						type="{device>/listItemType}"
 						press="onSelect"
-						title="{Name}">
+						title="{Bezei}">
 					</ObjectListItem>
 				</items>
 			</List>

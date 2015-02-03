@@ -1,19 +1,19 @@
 <mvc:View
-	controllerName="de.abat.scrumui5.view.Master"
-	displayBlock="true"
+	controllerName="de.abat.scrumui5.view.Master2"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
 	<Page
-		id="page"
+		id="master2Page"
 		title="{i18n>master2Title}"
 		showNavButton="true"
 		navButtonText="{i18n>master2NavButtonText}"
 		navButtonPress="onNavBack">
 		<subHeader>
-			<Bar id="searchBar">
+			<Bar id="master2SearchBar">
 				<contentMiddle>
 					<SearchField
-						id="searchField"
+						id="master2SearchField"
 						showRefreshButton="{device>/isNoTouch}"
 						placeholder="{i18n>master2SearchPlaceholder}"
 						search="onSearch"
@@ -24,13 +24,14 @@
 			</Bar>
 		</subHeader>
 		<content>
+			<!-- Context of Element Binding: NO / before item path -->
 			<PullToRefresh
-				id="pullToRefresh"
+				id="master2PullToRefresh"
 				visible="{device>/isTouch}"
 				refresh="onRefresh" />
 			<List
-				id="list"
-				items="{/Products}"
+				id="master2List"
+				items="{Projekte}"
 				mode="{device>/listMode}"
 				noDataText="{i18n>master2ListNoDataText}"
 				select="onSelect"
@@ -40,7 +41,7 @@
 					<ObjectListItem
 						type="{device>/listItemType}"
 						press="onSelect"
-						title="{Name}">
+						title="{Bezei}">
 					</ObjectListItem>
 				</items>
 			</List>
