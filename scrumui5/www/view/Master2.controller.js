@@ -115,8 +115,7 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master2", {
 
 	onSelect : function(oEvent) {
 		// Get the list item either from the listItem parameter or from the
-		// event's
-		// source itself (will depend on the device-dependent mode)
+		// event's source itself (will depend on the device-dependent mode)
 		this.showDetail(oEvent.getParameter("listItem") || oEvent.getSource());
 	},
 
