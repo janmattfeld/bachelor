@@ -44,7 +44,7 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master2", {
 				}
 			});
 		}
-
+		//TODO Change title to Customer name
 		if (oParameters.name === "master02" && jQuery.device.is.phone) {
 			this.getRouter().myNavToWithoutHash({
 				currentView : this.getView(),
@@ -136,8 +136,8 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master2", {
 	showDetail : function(oItem) {
 		// If we're on a phone device, include nav in history
 		var bReplace = jQuery.device.is.phone ? false : true;
-		this.getRouter().navTo("detail", {
-			from : "master",
+		this.getRouter().navTo("master3", {
+			from : "master2",
 			entity : oItem.getBindingContext().getPath().substr(1)
 		}, bReplace);
 	},

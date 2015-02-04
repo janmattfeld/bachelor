@@ -54,6 +54,7 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master", {
 	},
 
 	onRefresh : function(oEvent) {
+		// TODO On error? Hide bar and show error
 		var that = this;
 		// Trigger search again and hide pullToRefresh when data ready
 		var oProductList = this.getView().byId("list");
