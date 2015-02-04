@@ -3409,7 +3409,7 @@
 	visible: true, // boolean
 	enabled: true, // boolean
 	state: sap.ui.core.ValueState.None, // sap.ui.core.ValueState
-	displayValue: "0%", // string
+	displayValue: undefined, // string
 	percentValue: 0, // float
 	showValue: true, // boolean
 	width: "100%", // sap.ui.core.CSSSize
@@ -3425,7 +3425,7 @@
 	visible="true"
 	enabled="true"
 	state="None"
-	displayValue="0%"
+	displayValue=""
 	percentValue="0"
 	showValue="true"
 	width="100%"
