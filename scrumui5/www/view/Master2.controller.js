@@ -44,7 +44,7 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master2", {
 				}
 			});
 		}
-		//TODO Change title to Customer name
+
 		if (oParameters.name === "master02" && jQuery.device.is.phone) {
 			this.getRouter().myNavToWithoutHash({
 				currentView : this.getView(),

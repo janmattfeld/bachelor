@@ -5,7 +5,7 @@
 	xmlns="sap.m">
 	<Page
 		id="master3Page"
-		title="{i18n>master3Title}"
+		title="{Bezei}"
 		showNavButton="true"
 		navButtonText="{i18n>master3NavButtonText}"
 		navButtonPress="onNavBack">
