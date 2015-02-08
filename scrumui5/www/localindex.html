@@ -59,6 +59,8 @@
 		-->
 		<script>
 			//document.addEventListener("deviceready", function() {
+				// TODO Add event listener to load model on deveiceready only, test startup performance
+				// https://sapui5.netweaver.ondemand.com/sdk/#docs/guide/293eb945f0e945aaa776812481b4c533.html
 				sap.ui.getCore().attachInit(function() {
 			        new sap.m.Shell({
 			            app: new sap.ui.core.ComponentContainer({

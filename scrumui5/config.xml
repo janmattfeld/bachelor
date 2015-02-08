@@ -4,16 +4,16 @@
 	version="0.0.1"
 	xmlns="http://www.w3.org/ns/widgets"
 	xmlns:cdv="http://cordova.apache.org/ns/1.0">
-	<name>ScrumUI5</name>
+	<name>abat ScrumUI5</name>
 	<description>
 		Scrum Board using SAP SAPUI5 and Mobile Platform Services.
 	</description>
 	<author
 		email="jam@abat.de"
-		href="http://abat.de">
+		href="http://www.abat.de">
 		abat AG
 	</author>
-	<content src="index.html" />
+	<content src="localindex.html" />
 	<icon src="www/img/114_iPhone-Retina_Web_Clip.png" />
 	<access origin="*" />
 </widget>
