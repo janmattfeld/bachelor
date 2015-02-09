@@ -25,11 +25,27 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master", {
 		oEventBus.subscribe("Master2", "NotFound", this.onNotFound, this);
 	},
 
+	onRoutePatternMatched : function(oEvent) {
+		var sName = oEvent.getParameter("name");
+
+		if (sName !== "main") {
+			return;
+		}
+	},
+
 	onRouteMatched : function(oEvent) {
 		var sName = oEvent.getParameter("name");
 
 		if (sName !== "main") {
 			return;
+		}
+		
+		if (sName === "main" && !jQuery.device.is.phone) {
+			this.getRouter().myNavToWithoutHash({
+				currentView : this.getView(),
+				targetViewName : "de.abat.scrumui5.view.Welcome",
+				targetViewType : "XML",
+			});
 		}
 	},
 
@@ -54,7 +70,7 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master", {
 	},
 
 	onRefresh : function(oEvent) {
-		// TODO On error? Hide bar and show error
+		// TODO On error? Hide pull to refresh bar and show error
 		var that = this;
 		// Trigger search again and hide pullToRefresh when data ready
 		var oProductList = this.getView().byId("list");

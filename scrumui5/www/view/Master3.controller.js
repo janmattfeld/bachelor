@@ -15,14 +15,17 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master3", {
 
 		if (sName !== "master3") {
 			return;
-		}
+		}		
 
 		// Load the detail view in desktop
-		this.getRouter().myNavToWithoutHash({
-			currentView : this.getView(),
-			targetViewName : "de.abat.scrumui5.view.Detail",
-			targetViewType : "XML"
-		});
+		// TODO device model instead of jQuery?
+		if (sName === "master3" && !jQuery.device.is.phone) {
+			this.getRouter().myNavToWithoutHash({
+				currentView : this.getView(),
+				targetViewName : "de.abat.scrumui5.view.Welcome",
+				targetViewType : "XML",
+			});
+		}
 	},
 
 	onRouteMatched : function(oEvent) {
@@ -44,11 +47,12 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master3", {
 				}
 			});
 		}
+		// Load the detail view in desktop
 		// TODO device model instead of jQuery?
-		if (oParameters.name === "master03" && jQuery.device.is.phone) {
+		if (oParameters.name === "master3" && !jQuery.device.is.phone) {
 			this.getRouter().myNavToWithoutHash({
 				currentView : this.getView(),
-				targetViewName : "odata_org_test.view.Detail",
+				targetViewName : "de.abat.scrumui5.view.Welcome",
 				targetViewType : "XML",
 				transition : "slide"
 			});
@@ -99,13 +103,12 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master3", {
 	onNavBack : function() {
 		// This is only relevant when running on phone devices
 		// Add navigation property path to parent collection
-		var sBackTo = "/Projekte";
 		var oProductList = this.getView().byId("master3List");
 		var oBinding = oProductList.getBinding("items");
 		var sPath = oBinding.getContext().getPath().substr(1);
-		this.getRouter().myNavBack("master02", {
+		this.getRouter().myNavBack("master2", {
 			from : "master3",
-			entity : sPath
+			entity : sPath,
 		});
 	},
 

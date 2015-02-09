@@ -2,34 +2,14 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master2", {
 
 	onInit : function() {
 		this.getRouter().attachRouteMatched(this.onRouteMatched, this);
-
-		// On phone devices, there is nothing to select from the list. There is
-		// no need to attach events.
-		if (!sap.ui.Device.system.phone) {
-			this.getRouter().attachRoutePatternMatched(this.onRoutePatternMatched, this);
-		}
-	},
-
-	onRoutePatternMatched : function(oEvent) {
-		var sName = oEvent.getParameter("name");
-
-		if (sName !== "master2") {
-			return;
-		}
-
-		// Load the detail view in desktop
-		this.getRouter().myNavToWithoutHash({
-			currentView : this.getView(),
-			targetViewName : "de.abat.scrumui5.view.Detail",
-			targetViewType : "XML"
-		});
 	},
 
 	onRouteMatched : function(oEvent) {
 		var oParameters = oEvent.getParameters();
+		var sName = oEvent.getParameter("name");
 		var oView = this.getView();
 
-		if (oParameters.name === "master2") {
+		if (sName === "master2") {
 			var sEntityPath = "/" + oParameters.arguments.entity;
 			this.bindView(sEntityPath);
 
@@ -37,20 +17,18 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master2", {
 			var that = this;
 			oView.getModel().attachRequestCompleted(function() {
 				if (jQuery("#" + that.getView().getId()).is(':visible')) {
-					that.selectFirstItem();
 					oEventBus.publish("Master2", "LoadFinished", {
 						oListItem : that.getView().byId("master2List").getItems()[0]
 					});
 				}
 			});
 		}
-
-		if (oParameters.name === "master02" && jQuery.device.is.phone) {
+		
+		if (sName === "master2" && !jQuery.device.is.phone) {
 			this.getRouter().myNavToWithoutHash({
 				currentView : this.getView(),
-				targetViewName : "odata_org_test.view.Detail",
+				targetViewName : "de.abat.scrumui5.view.Welcome",
 				targetViewType : "XML",
-				transition : "slide"
 			});
 		}
 	},
@@ -69,31 +47,12 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master2", {
 			oView.getElementBinding().attachEventOnce("dataReceived", jQuery.proxy(function() {
 				var oData = oView.getModel().getData(sEntityPath);
 				if (!oData) {
+					// TODO Show Error Message in Master
 					this.showEmptyView();
 					this.fireDetailNotFound();
 				}
 			}, this));
 		}
-	},
-
-	selectFirstItem : function() {
-		var oList = this.getView().byId("master2List");
-		var aItems = oList.getItems();
-		if (aItems.length) {
-			oList.setSelectedItem(aItems[0], true);
-		}
-	},
-
-	showEmptyView : function() {
-		this.getRouter().myNavToWithoutHash({
-			currentView : this.getView(),
-			targetViewName : "de.abat.scrumui5.view.NotFound",
-			targetViewType : "XML"
-		});
-	},
-
-	fireDetailNotFound : function() {
-		this.getEventBus().publish("Master2", "NotFound");
 	},
 
 	onNavBack : function() {
