@@ -5,7 +5,7 @@
 	xmlns="sap.m">
 	<Page
 		id="master2Page"
-		title="{Bezei}"
+		title="{Kunde}"
 		showNavButton="true"
 		navButtonText="{i18n>master2NavButtonText}"
 		navButtonPress="onNavBack">

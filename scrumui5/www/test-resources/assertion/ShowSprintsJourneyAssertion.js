@@ -45,7 +45,7 @@ de.abat.scrumui5.test.assertion.ShowSprintsJourneyAssertion = sap.ui.test.Opa5.e
 			},
 			errorMessage : "I was NOT taken to the project list of the second customer",
 			check : function(oTitle) {
-				return oTitle.getText() === "ThyssenKrupp";
+				return oTitle.getText() === "TKMI";
 			}
 		});
 	},
