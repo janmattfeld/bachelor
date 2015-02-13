@@ -117,7 +117,7 @@ sap.ui.core.mvc.Controller.extend("de.abat.scrumui5.view.Master3", {
 		var filters = [];
 		var searchString = this.getView().byId("master3SearchField").getValue();
 		if (searchString && searchString.length > 0) {
-			filters = [ new sap.ui.model.Filter("Bezei", sap.ui.model.FilterOperator.Contains, searchString) ];
+			filters = [ new sap.ui.model.Filter("Sprint", sap.ui.model.FilterOperator.Contains, searchString) ];
 		}
 
 		// Update list binding

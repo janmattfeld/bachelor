@@ -17,6 +17,7 @@
 						showRefreshButton="{device>/isNoTouch}"
 						placeholder="{i18n>master3SearchPlaceholder}"
 						search="onSearch"
+						liveChange="onSearch"
 						tooltip="{i18n>master3SearchTooltip}"
 						width="100%">
 					</SearchField>
