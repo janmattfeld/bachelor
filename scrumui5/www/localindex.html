@@ -47,7 +47,8 @@
 			data-sap-ui-theme="sap_bluecrystal"
 			data-sap-ui-preload=""
 			data-sap-ui-resourceroots='{
-				"de.abat.scrumui5": "./"
+				"de.abat.scrumui5": "./",
+				"de.abat.scrumui5.service": "./test/service/"
 			}'>
 		</script>		
 		<!-- 
@@ -58,10 +59,16 @@
 				-> enable deviceready event listener in hybrid apps
 		-->
 		<script>
-			//document.addEventListener("deviceready", function() {
+			//document.addEventListener("deviceready", function() {				
 				// TODO Add event listener to load model on deveiceready only, test startup performance
 				// https://sapui5.netweaver.ondemand.com/sdk/#docs/guide/293eb945f0e945aaa776812481b4c533.html
 				sap.ui.getCore().attachInit(function() {
+					// Set up mock server for local testing
+					if (jQuery.sap.getUriParameters().get("responderOn") === "true") {
+						jQuery.sap.require("de.abat.scrumui5.service.server");
+						de.abat.scrumui5.service.server.init();
+					}
+					// Initialize the UI component
 			        new sap.m.Shell({
 			            app: new sap.ui.core.ComponentContainer({
 			                height : "100%",
