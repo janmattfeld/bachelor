@@ -136,7 +136,8 @@ module.exports = function (config) {
 
 
 		// Continuous Integration mode
+		// Also for WebStorm (use integrated auto-test instead)
 		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: false
+		singleRun: true
 	});
 };
