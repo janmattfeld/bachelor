@@ -1,0 +1,15 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core">
+	<Page title="{i18n>welcomeTitle}">
+		<content>
+			<HBox
+				alignItems="Center"
+				justifyContent="Center">
+				<!--TODO: Use relative path to Component-->
+				<Image src="./img/Background_Logo.png">
+				</Image>
+			</HBox>
+		</content>
+	</Page>
+</mvc:View>
