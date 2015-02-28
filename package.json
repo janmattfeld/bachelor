@@ -1,6 +1,20 @@
 {
-  "name": "de.abat.scrumui5",
+  "name": "scrumui5",
   "version": "0.0.1",
+  "description": "SAP UI5 Scrum Board",
+  "private": true,
+  "keywords": [
+    "sapui5",
+    "openui5",
+    "ui5",
+    "scrum"
+  ],
+  "author": {
+    "name": "abat AG",
+    "email": "SAP.Mobile@abat.de",
+    "url": "http://www.abat.de"
+  },
+  "bugs": "https://github.com/janmattfeld/bachelor/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/janmattfeld/bachelor.git"
@@ -8,6 +22,7 @@
   "devDependencies": {
     "bower": "^1.3.12",
     "eslint": "^0.15.0",
+    "eslint-plugin-openui5": "^0.1.0",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-compress": "^0.12.0",
@@ -20,14 +35,12 @@
     "grunt-karma": "^0.10.1",
     "grunt-npm": "0.0.2",
     "grunt-openui5": "^0.5.0",
+    "karma": ">=0.12.8",
     "karma-chrome-launcher": "~0.1",
     "karma-cli": "0.0.4",
     "karma-coverage": "^0.2.7",
-    "karma-openui5": "~0.2",
+    "karma-openui5": ">=0.2",
     "karma-phantomjs-launcher": "~0.1",
     "karma-qunit": "~0.1"
-  },
-  "peerDependencies": {
-    "karma": ">=0.12.8"
   }
 }
