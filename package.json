@@ -40,7 +40,6 @@
     "karma-cli": "0.0.4",
     "karma-coverage": "^0.2.7",
     "karma-openui5": ">=0.2",
-    "karma-phantomjs-launcher": "~0.1",
     "karma-qunit": "~0.1"
   }
 }
