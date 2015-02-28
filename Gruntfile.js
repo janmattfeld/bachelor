@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2015 abat AG
+ */
+
+"use strict";
+
 module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'), // the package file to use
@@ -48,10 +54,10 @@ module.exports = function (grunt) {
 			},
 
 			beautify: {
-				options: {beautify: true, mangle:false},
+				options: {beautify: true, mangle: false},
 				files: grunt.file.expandMapping(['app/**/*.js', 'test/**/*.js'], '', {
 					rename: function (destBase, destPath) {
-						return destBase + destPath
+						return destBase + destPath;
 					}
 				})
 			}
