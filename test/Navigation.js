@@ -21,8 +21,8 @@ sap.ui.require(
 
 		opaTest("Should see the customer list", function (Given, When, Then) {
 			// Arrangements
-			//Given.GivenIStartTheAppOnADesktopDevice();
-			Given.iStartAComponent('de.abat.scrumui5');
+			Given.GivenIStartTheAppOnADesktopDevice();
+			//Given.iStartAComponent('de.abat.scrumui5');
 
 			// Actions
 			When.iLookAtTheScreen();
