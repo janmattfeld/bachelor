@@ -22,8 +22,8 @@ sap.ui.require(
 		opaTest("Should see the customer list", function (Given, When, Then) {
 			// Arrangements
 			// TODO: Check if karma-run and start component instead of iframe for code coverage
-			Given.GivenIStartTheAppOnADesktopDevice();
-			//Given.iStartAComponent('de.abat.scrumui5');
+			//Given.GivenIStartTheAppOnADesktopDevice();
+			Given.iStartAComponent('de.abat.scrumui5');
 
 			// Actions
 			When.iLookAtTheScreen();
