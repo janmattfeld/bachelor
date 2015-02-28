@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2015 abat AG
+ */
+
+"use strict";
+
 module.exports = function (config) {
 	config.set({
 

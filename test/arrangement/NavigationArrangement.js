@@ -1,18 +1,32 @@
+'use strict';
+
 sap.ui.define("de.abat.scrumui5.test.arrangement.NavigationArrangement", [
 	"jquery.sap.global",
 	"sap/ui/test/Opa5",
 	"sap/ui/core/ComponentContainer"
 ], function (jQuery, Opa5, ComponentContainer) {
 
-	'use strict';
-
 	var oContainer = null;
 	var oComponent = null;
 
 	return Opa5.extend("de.abat.scrumui5.test.arrangement.NavigationArrangement", {
-		iStartMyApp: function (sHash) {
+
+		_getFrameUrl: function (sHash, bAddPhone) {
 			sHash = sHash || "";
-			return this.iStartMyAppInAFrame("../index.html?responderOn=true" + sHash);
+			var sUrl = jQuery.sap.getResourcePath("root/index", ".html"), sUrlParameters = "?responderOn=true";
+			if (bAddPhone) {
+				sUrlParameters = sUrlParameters + "&sap-ui-xx-fakeOS=ios";
+			}
+			sUrl = sUrl + sUrlParameters + sHash;
+			return sUrl;
+		},
+
+		GivenIStartTheAppOnADesktopDevice: function (sHash) {
+			this.iStartMyAppInAFrame(this._getFrameUrl(sHash));
+		},
+
+		GivenIStartTheAppOnAPhone: function (sHash) {
+			this.iStartMyAppInAFrame(this._getFrameUrl(sHash, true));
 		},
 
 		iStartAComponent: function (sName) {

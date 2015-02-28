@@ -1,12 +1,14 @@
+'use strict';
+
 sap.ui.require(
-	["jquery.sap.global",
+	[
 		'sap/ui/test/Opa5',
-		"sap/ui/test/opaQunit",
+		'sap/ui/test/opaQunit',
 		'de/abat/scrumui5/test/action/NavigationAction',
 		'de/abat/scrumui5/test/arrangement/NavigationArrangement',
 		'de/abat/scrumui5/test/assertion/NavigationAssertion'
 	],
-	function (jQuery, Opa5, opaQunit, NavigationAction, NavigationArrangement, NavigationAssertion) {
+	function (Opa5, opaQunit, NavigationAction, NavigationArrangement, NavigationAssertion) {
 
 		Opa5.extendConfig({
 			actions: new NavigationAction(),
