@@ -18,10 +18,10 @@
 		abat AG
 	</author>
 
-	<content src="app/localindex.html" />
+	<content src="localindex.html" />
 
 	<!-- TODO: Different Icon and Splashscreen sizes -->
-	<icon src="www/img/114_iPhone-Retina_Web_Clip.png" />
+	<icon src="img/114_iPhone-Retina_Web_Clip.png" />
 
 	<preference
 		name="SplashScreen"
