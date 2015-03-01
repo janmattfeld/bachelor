@@ -5,13 +5,12 @@
 "use strict";
 
 module.exports = function (grunt) {
+
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'), // the package file to use
-
-// taskName: { // internal task or name of a plugin (like "qunit") // // options, etc (see the task/plugin for details) // },
-
+		pkg: grunt.file.readJSON('package.json'),
 		karma: {
 			unit: {
+				// TODO: Use config file only
 				configFile: 'karma.conf.js',
 				options: {
 					client: {
@@ -42,17 +41,22 @@ module.exports = function (grunt) {
 
 			}
 		},
-
 		uglify: {
 			min: {
-				options: {mangle: true},
+				options: {
+					mangle: true,
+					banner: '/*! \n'
+					+ ' * <%= pkg.description %> v<%= pkg.version %>\n'
+					+ ' * Copyright (c) 2015 abat AG\n'
+					+ ' * Date: <%= grunt.template.today("yyyy-mm-dd") %>\n'
+					+ ' */\n'
+				},
 				files: grunt.file.expandMapping(['app/**/*.js', 'test/**/*.js', '!app/**/*.min.*', '!test/**/*.min.*'], '', {
 					rename: function (destBase, destPath) {
 						return destBase + destPath.replace('.js', '.min.js');
 					}
 				})
 			},
-
 			beautify: {
 				options: {beautify: true, mangle: false},
 				files: grunt.file.expandMapping(['app/**/*.js', 'test/**/*.js'], '', {
@@ -62,7 +66,6 @@ module.exports = function (grunt) {
 				})
 			}
 		},
-
 		eslint: {
 			options: {
 				configFile: '.eslintrc',
@@ -73,15 +76,13 @@ module.exports = function (grunt) {
 
 			}, target: ['app/**/*.js', 'test/**/*.js']
 		}
-
 	});
 
-// load up your plugins
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-karma');
-// register one or more task lists (you should ALWAYS have a "default" task list)
+
 	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'uglify:min']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
 };
