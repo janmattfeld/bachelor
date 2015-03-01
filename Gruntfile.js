@@ -87,6 +87,7 @@ module.exports = function (grunt) {
 		"phonegap-build": {
 			main: {
 				options: {
+					keys: {ios: { "password": "abat" }},
 					archive: "www.zip",
 					"appId": "1334667",
 					"user": {
