@@ -68,7 +68,7 @@ module.exports = function (grunt) {
 				configFile: '.eslintrc',
 				ignoreFile: '.eslintignore',
 				quiet: false,
-				format: 'jslint-xml',
+				format: 'checkstyle',
 				outputFile: 'test-reports/eslint-cov.xml'
 
 			}, target: ['app/**/*.js', 'test/**/*.js']
