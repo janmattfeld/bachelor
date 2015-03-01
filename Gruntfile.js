@@ -66,6 +66,47 @@ module.exports = function (grunt) {
 				})
 			}
 		},
+				
+		compress: {
+			main: {
+				options: {
+					archive: 'app.zip'
+				},
+				files: [
+					{
+						src: ['config.xml'],
+						dest: './www',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						cwd: 'app',
+						src: ['**'],
+						dest: 'www'
+					},
+					{
+						expand: true,
+						cwd: 'bower_components/openui5-mobile/resources',
+						src: ['**', '!*dbg.js'],
+						dest: 'www/resources/'
+					}
+				]
+			}
+		},
+
+		"phonegap-build": {
+			main: {
+				options: {
+					archive: "app.zip",
+					"appId": "1334667",
+					"user": {
+						"email": "max@azimi.de",
+						"password": "phonegapbuild"
+					}
+				}
+			}
+		},
+		
 		eslint: {
 			options: {
 				configFile: '.eslintrc',
@@ -78,11 +119,15 @@ module.exports = function (grunt) {
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-qunit');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-phonegap-build');
+	
 
-	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'uglify:min']);
+	grunt.registerTask('default', ['eslint', 'karma:unit:start']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
+	grunt.registerTask('build', ['uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('complete' ['eslint', 'karma:unit:start', 'uglify:min', 'compress', 'phonegap-build'])
 };
