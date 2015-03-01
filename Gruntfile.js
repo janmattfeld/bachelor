@@ -98,6 +98,8 @@ module.exports = function (grunt) {
 			}
 		},
 
+		clean: ["target"],
+
 		copy: {
 			main: {
 				files: [
@@ -134,6 +136,7 @@ module.exports = function (grunt) {
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-eslint');
@@ -141,8 +144,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-phonegap-build');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 
-	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'copy' ,'uglify:min']);
+	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'clean', 'copy' ,'uglify:min']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
-	grunt.registerTask('build', ['copy', 'uglify:min', 'compress', 'phonegap-build']);
-	grunt.registerTask('complete', ['eslint', 'karma:unit:start', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('build', ['clean', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('complete', ['eslint', 'karma:unit:start', 'clean', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
 };
