@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 					},
 					preprocessors: {'app/**/*.js': ['coverage']},
 					reporters: ['progress', 'coverage'],
-					coverageReporter: {type: 'cobertura', dir: 'test-results/'}
+					coverageReporter: {type: 'cobertura', dir: 'test-reports/'}
 				}
 
 			}
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
 				configFile: '.eslintrc',
 				ignoreFile: '.eslintignore',
 				quiet: false,
-				format: 'checkstyle',
+				format: 'jslint',
 				outputFile: 'test-reports/eslint-cov.xml'
 
 			}, target: ['app/**/*.js', 'test/**/*.js']
