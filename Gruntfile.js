@@ -129,5 +129,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', ['eslint', 'karma:unit:start']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
 	grunt.registerTask('build', ['uglify:min', 'compress', 'phonegap-build']);
-	grunt.registerTask('complete' ['eslint', 'karma:unit:start', 'uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('complete', ['eslint', 'karma:unit:start', 'uglify:min', 'compress', 'phonegap-build']);
 };
