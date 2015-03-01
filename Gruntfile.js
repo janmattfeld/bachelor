@@ -11,6 +11,7 @@ module.exports = function (grunt) {
 		karma: {
 			unit: {
 				// TODO: Use config file only
+				// openui5 options not found in karma.conf
 				configFile: 'karma.conf.js',
 				options: {
 					client: {
