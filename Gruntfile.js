@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 				})
 			}
 		},
-				
+
 		compress: {
 			main: {
 				options: {
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		
+
 		copy: {
 			main: {
 				files: [
@@ -110,7 +110,7 @@ module.exports = function (grunt) {
 					{
 						expand: true,
 						cwd: 'bower_components/openui5-mobile/resources',
-						src: ['**', '!**/*dbg.js'],
+						src: ['**', '!**/*dbg.js', '!sap-ui-core-nojQuery.js'],
 						dest: 'target/resources/'
 					},
 					{
@@ -121,7 +121,7 @@ module.exports = function (grunt) {
 				]
 			}
 		},
-		
+
 		eslint: {
 			options: {
 				configFile: '.eslintrc',
@@ -140,7 +140,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-phonegap-build');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	
+
 	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'copy' ,'uglify:min']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
 	grunt.registerTask('build', ['copy', 'uglify:min', 'compress', 'phonegap-build']);
