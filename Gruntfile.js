@@ -52,9 +52,9 @@ module.exports = function (grunt) {
 					+ ' * Date: <%= grunt.template.today("yyyy-mm-dd") %>\n'
 					+ ' */\n'
 				},
-				files: grunt.file.expandMapping(['app/**/*.js', 'test/**/*.js', '!app/**/*.min.*', '!test/**/*.min.*'], '', {
+				files: grunt.file.expandMapping(['target/**/*.js', '!target/resources/**/*'], '', {
 					rename: function (destBase, destPath) {
-						return destBase + destPath.replace('.js', '.min.js');
+						return destBase + destPath.replace('.js', '.js');
 					}
 				})
 			},
@@ -71,25 +71,14 @@ module.exports = function (grunt) {
 		compress: {
 			main: {
 				options: {
-					archive: 'app.zip'
+					archive: 'www.zip'
 				},
 				files: [
 					{
-						src: ['config.xml'],
-						dest: './www',
-						filter: 'isFile'
-					},
-					{
 						expand: true,
-						cwd: 'app',
+						cwd: 'target',
 						src: ['**'],
 						dest: 'www'
-					},
-					{
-						expand: true,
-						cwd: 'bower_components/openui5-mobile/resources',
-						src: ['**', '!*dbg.js'],
-						dest: 'www/resources/'
 					}
 				]
 			}
@@ -98,13 +87,37 @@ module.exports = function (grunt) {
 		"phonegap-build": {
 			main: {
 				options: {
-					archive: "app.zip",
+					archive: "www.zip",
 					"appId": "1334667",
 					"user": {
 						"email": "max@azimi.de",
 						"password": "phonegapbuild"
 					}
 				}
+			}
+		},
+		
+		copy: {
+			main: {
+				files: [
+					{
+						expand: true,
+						cwd: 'app/',
+						src: ['**'],
+						dest: 'target/'
+					},
+					{
+						expand: true,
+						cwd: 'bower_components/openui5-mobile/resources',
+						src: ['**', '!**/*dbg.js'],
+						dest: 'target/resources/'
+					},
+					{
+						src: ['config.xml'],
+						dest: 'target/'
+					}
+
+				]
 			}
 		},
 		
@@ -125,10 +138,10 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-phonegap-build');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	
-
-	grunt.registerTask('default', ['eslint', 'karma:unit:start']);
+	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'copy' ,'uglify:min']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
-	grunt.registerTask('build', ['uglify:min', 'compress', 'phonegap-build']);
-	grunt.registerTask('complete', ['eslint', 'karma:unit:start', 'uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('build', ['copy', 'uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('complete', ['eslint', 'karma:unit:start', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
 };
