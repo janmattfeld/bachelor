@@ -133,7 +133,7 @@ module.exports = function (grunt) {
 						logicalor : true,
 						switchcase : true,
 						forin : true,
-						trycatch : true
+						trycatch : true,
 						newmi: true
 					}
 					
