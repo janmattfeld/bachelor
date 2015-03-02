@@ -26,15 +26,15 @@ module.exports = function (config) {
 					themeroots: {
 						'sap_bluecrystal': '/base/bower_components/openui5-themelib_sap_bluecrystal/resources'
 					},
-					mockserver: {
-						config: {
-							autoRespond: true
-						},
-						rootUri: 'http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/',
-						metadataURL: '/base/test/service/metadata.xml',
-						mockdataSettings: '/base/test/service'
-					},
 					preload: ''
+				},
+				mockserver: {
+					config: {
+						autoRespond: true
+					},
+					rootUri: 'http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/',
+					metadataURL: '/base/test/service/metadata.xml',
+					mockdataSettings: '/base/test/service'
 				}
 			}
 		},

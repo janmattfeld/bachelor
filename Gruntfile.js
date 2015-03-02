@@ -25,13 +25,13 @@ module.exports = function (grunt) {
 									'de.abat.scrumui5': '/base/app'
 								},
 								themeroots: {'sap_bluecrystal': '/base/bower_components/openui5-themelib_sap_bluecrystal/resources'},
-								mockserver: {
-									config: {autoRespond: true},
-									rootUri: 'http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/',
-									metadataURL: '/base/test/service/metadata.xml',
-									mockdataSettings: '/base/test/service'
-								},
 								preload: ''
+							},
+							mockserver: {
+								config: {autoRespond: true},
+								rootUri: 'http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/',
+								metadataURL: '/base/test/service/metadata.xml',
+								mockdataSettings: '/base/test/service'
 							}
 						}
 					},
@@ -39,7 +39,6 @@ module.exports = function (grunt) {
 					reporters: ['progress', 'coverage'],
 					coverageReporter: {type: 'cobertura', dir: 'test-reports/'}
 				}
-
 			}
 		},
 		uglify: {
@@ -67,7 +66,6 @@ module.exports = function (grunt) {
 				})
 			}
 		},
-
 		compress: {
 			main: {
 				options: {
@@ -83,7 +81,6 @@ module.exports = function (grunt) {
 				]
 			}
 		},
-
 		"phonegap-build": {
 			main: {
 				options: {
@@ -97,9 +94,7 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-
 		clean: ["target","test-reports", "test-reports/plato"],
-
 		copy: {
 			main: {
 				files: [
@@ -119,11 +114,9 @@ module.exports = function (grunt) {
 						src: ['config.xml'],
 						dest: 'target/'
 					}
-
 				]
 			}
 		},
-
 		plato: {
 			your_task: {
 				options : {
@@ -135,15 +128,14 @@ module.exports = function (grunt) {
 						trycatch : true,
 						newmi: true
 					}
-					
-					
+
+
 				},
 				files: {
 					'test-reports/plato': ['app/**/*.js']
 				}
 			}
 		},
-
 		eslint: {
 			options: {
 				configFile: '.eslintrc',
@@ -151,7 +143,6 @@ module.exports = function (grunt) {
 				quiet: false,
 				format: 'checkstyle',
 				outputFile: 'test-reports/eslint-cov.xml'
-
 			}, target: ['app/**/*.js', 'test/**/*.js']
 		}
 	});
@@ -164,7 +155,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-phonegap-build');
 	grunt.loadNpmTasks('grunt-plato');
-	
 
 	grunt.registerTask('default', ['clean', 'eslint', 'karma:unit:start', 'copy' ,'uglify:min']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
