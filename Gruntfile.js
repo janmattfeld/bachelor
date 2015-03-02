@@ -98,7 +98,7 @@ module.exports = function (grunt) {
 			}
 		},
 
-		clean: ['target','test-reports'],
+		clean: ["target","test-reports", "test-reports/plato"],
 
 		copy: {
 			main: {
