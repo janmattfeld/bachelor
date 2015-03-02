@@ -1,3 +1,4 @@
+[![Build Status](http://lan.az-n.de:8080/buildStatus/icon?job=scrumUI5)](http://192.168.100.62:8080/job/scrumUI5/)
 ScrumUI5
 ========
 
