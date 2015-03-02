@@ -163,8 +163,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-plato');
 	
 
-	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'clean', 'copy' ,'uglify:min']);
+	grunt.registerTask('default', ['clean', 'eslint', 'karma:unit:start', 'copy' ,'uglify:min']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
 	grunt.registerTask('build', ['clean', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
-	grunt.registerTask('complete', ['eslint', 'plato' , 'karma:unit:start', 'clean', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('complete', ['clean', 'eslint', 'plato' , 'karma:unit:start', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
 };
