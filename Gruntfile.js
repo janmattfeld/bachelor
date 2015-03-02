@@ -127,13 +127,17 @@ module.exports = function (grunt) {
 		plato: {
 			your_task: {
 				options : {
-					jshint : false,
+					jshint : grunt.file.readJSON('.eslintrc')
+					//jshint : false,
 					complexity : {
 						logicalor : true,
 						switchcase : true,
 						forin : true,
 						trycatch : true
+						newmi: true
 					}
+					
+					
 				},
 				files: {
 					'test-reports/plato': ['app/**/*.js']
