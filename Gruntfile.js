@@ -98,7 +98,7 @@ module.exports = function (grunt) {
 			}
 		},
 
-		clean: ["target"],
+		clean: ['target','test-reports'],
 
 		copy: {
 			main: {
