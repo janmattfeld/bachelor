@@ -124,6 +124,23 @@ module.exports = function (grunt) {
 			}
 		},
 
+		plato: {
+			your_task: {
+				options : {
+					jshint : false,
+					complexity : {
+						logicalor : true,
+						switchcase : true,
+						forin : true,
+						trycatch : true
+					}
+				},
+				files: {
+					'test-reports/plato': ['app/**/*.js']
+				}
+			}
+		},
+
 		eslint: {
 			options: {
 				configFile: '.eslintrc',
@@ -138,14 +155,16 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-compress');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-phonegap-build');
-	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-plato');
+	
 
 	grunt.registerTask('default', ['eslint', 'karma:unit:start', 'clean', 'copy' ,'uglify:min']);
 	grunt.registerTask('beautify', ['uglify:beautify']);
 	grunt.registerTask('build', ['clean', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
-	grunt.registerTask('complete', ['eslint', 'karma:unit:start', 'clean', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
+	grunt.registerTask('complete', ['eslint', 'plato' , 'karma:unit:start', 'clean', 'copy', 'uglify:min', 'compress', 'phonegap-build']);
 };
