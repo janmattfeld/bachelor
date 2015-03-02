@@ -127,7 +127,7 @@ module.exports = function (grunt) {
 		plato: {
 			your_task: {
 				options : {
-					jshint : grunt.file.readJSON('.eslintrc')
+					jshint : grunt.file.readJSON('.eslintrc'),
 					//jshint : false,
 					complexity : {
 						logicalor : true,
