@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 
 <widget
-	id="de.abat.scrumui5"
-	version="0.0.1"
-	xmlns="http://www.w3.org/ns/widgets"
-	xmlns:cdv="http://cordova.apache.org/ns/1.0">
+		id="de.abat.scrumui5"
+		version="0.0.1"
+		xmlns="http://www.w3.org/ns/widgets"
+		xmlns:cdv="http://cordova.apache.org/ns/1.0"
+		xmlns:gap="http://phonegap.com/ns/1.0">
 
 	<name>abat ScrumUI5</name>
 
@@ -13,42 +14,46 @@
 	</description>
 
 	<author
-		email="SAP.Mobile@abat.de"
-		href="http://www.abat.de">
+			email="SAP.Mobile@abat.de"
+			href="http://www.abat.de">
 		abat AG
 	</author>
 
-	<content src="index.html" />
+	<content src="index.html"/>
 
 	<!-- TODO: Different Icon and Splashscreen sizes -->
-	<icon src="img/114_iPhone-Retina_Web_Clip.png" />
+	<icon src="img/114_iPhone-Retina_Web_Clip.png"/>
 
 	<preference
-		name="SplashScreen"
-		value="screen" />
+			name="SplashScreen"
+			value="splash"/>
 	<preference
-		name="SplashScreenDelay"
-		value="10000" />
+			name="SplashScreenDelay"
+			value="10000"/>
+	<gap:splash src="splash.png"/>
+
 
 	<!-- Change iOS Status Bar Color to "SAPUI5 Blue" -->
 	<preference
-		name="StatusBarOverlaysWebView"
-		value="false" />
+			name="StatusBarOverlaysWebView"
+			value="false"/>
 	<preference
-		name="StatusBarBackgroundColor"
-		value="#009DE0" />
+			name="StatusBarBackgroundColor"
+			value="#009DE0"/>
 	<preference
-		name="StatusBarStyle"
-		value="lightcontent" />
+			name="StatusBarStyle"
+			value="lightcontent"/>
 
 	<feature name="StatusBar">
 		<param
-			name="ios-package"
-			value="CDVStatusBar"
-			onload="true" />
+				name="ios-package"
+				value="CDVStatusBar"
+				onload="true"/>
 	</feature>
 
+	<gap:plugin name="com.phonegap.plugin.statusbar"/>
+
 	<!-- TODO: Whitelist HCP -->
-	<access origin="*" />
+	<access origin="*"/>
 
 </widget>
