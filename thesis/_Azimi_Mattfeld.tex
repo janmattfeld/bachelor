@@ -1,0 +1,73 @@
+\documentclass[bachelor,german]{hgbthesis}
+% Zulässige Class Options: 
+%   Typ der Arbeit: diplom, master (default), bachelor, praktikum 
+%   Hauptsprache: german (default), english
+%%------------------------------------------------------------
+
+\usepackage{microtype} % Verhindert under-/overfull hboxes
+
+\graphicspath{{images/}}    	% name of directory containing the images
+\logofile{logo_hs_bremerhaven}	% name of PDF, remove or use \logofile{} for no logo
+\bibliography{literatur}  		% name of the BibTeX (.bib) file
+
+\newcommand{\myTitle}{Testgetriebene Entwicklung und kontinuierliche Integration mit der SAP Mobile Platform\xspace} 
+\newcommand{\myKeywords}{SAPUI5, OData,	Continuous Integration, Test-Driven-Development\xspace}
+\newcommand{\mySubtitle}{\xspace}
+\newcommand{\myDegree}{Bachelor of Science\xspace}
+\newcommand{\myName}{Maximilian Azimi, Jan-Henrich Mattfeld\xspace}
+\newcommand{\myMatrikel}{29287, 29866\xspace}
+\newcommand{\myProf}{mgr\,inż. Alfred Schmidt\xspace}
+\newcommand{\myCourse}{\xspace}
+\newcommand{\myOtherProf}{\xspace}
+\newcommand{\mySupervisor}{Dipl.-Wirt.-Inf.\,(FH)\,Christian Distelkamp\xspace}
+\newcommand{\myFaculty}{\xspace}
+\newcommand{\myDepartment}{Fachbereich\,2\xspace}
+\newcommand{\myUni}{Hochschule Bremerhaven\xspace}
+\newcommand{\myUniAddress}{An der Karlstadt 8\xspace\\27586 Bremerhaven\xspace}
+\newcommand{\myLocation}{Bremerhaven\xspace}
+\newcommand{\myTime}{März 2014\xspace}
+\newcommand{\myVersion}{Version 1.0\xspace}
+
+%%%----------------------------------------------------------
+\begin{document}
+%%%----------------------------------------------------------
+
+% Einträge für ALLE Arbeiten: --------------------------------
+\title{\myTitle}
+\author{\myName}
+\studiengang{Wirtschaftsinformatik}
+\studienort{Bremerhaven}
+\abgabedatum{2015}{03}{23}	% {YYYY}{MM}{DD}
+
+%%%----------------------------------------------------------
+\frontmatter
+\maketitle
+\tableofcontents
+%%%----------------------------------------------------------
+
+\include{kurzfassung}		
+%\include{abstract}			
+
+%%%----------------------------------------------------------
+\mainmatter         % Hauptteil (ab hier arab. Seitenzahlen)
+%%%----------------------------------------------------------
+
+\include{einleitung}
+\include{grundlagen}
+\include{aforderungsanalyse}
+\include{implementierung}
+\include{schlussfolgerungen}
+
+%%%----------------------------------------------------------
+%%%Anhang
+%\appendix
+%\include{anhang_a}	% Quelltext dieses Dokuments
+
+%%%----------------------------------------------------------
+\MakeBibliography
+%%%----------------------------------------------------------
+
+%%%Messbox zur Druckkontrolle
+\include{messbox}
+
+\end{document}
