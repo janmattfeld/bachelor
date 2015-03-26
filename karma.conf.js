@@ -1,5 +1,7 @@
-/*
+/*!
+ * SAP UI5 Scrum Board v0.0.1
  * Copyright (c) 2015 abat AG
+ * Date: 2015-03-02
  */
 
 "use strict";
