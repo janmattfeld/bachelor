@@ -1,0 +1,10 @@
+{
+  "name": "scrumui5",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "openui5-sap.ui.core": "openui5/packaged-sap.ui.core",
+    "openui5-sap.m": "openui5/packaged-sap.m",
+    "openui5-sap_bluecrystal": "openui5/packaged-sap_bluecrystal"
+  }
+}

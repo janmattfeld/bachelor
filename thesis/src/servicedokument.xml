@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app:service xml:lang="de" 
+    xml:base="http://host:port/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/"
+    xmlns:app="http://www.w3.org/2007/app"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <app:workspace>
+    <atom:title type="text">Data</atom:title>
+    <app:collection sap:label="Sprints" sap:creatable="false" 
+        sap:updatable="false" sap:deletable="false" sap:pageable="false" 
+        sap:addressable="false" sap:content-version="1" href="Sprints">
+      <atom:title type="text">Sprints</atom:title>
+      <sap:member-title>Sprints</sap:member-title>
+    </app:collection>
+    <app:collection sap:label="Aufgaben" sap:creatable="false" 
+      sap:updatable="false" sap:deletable="false" sap:pageable="false" 
+      sap:addressable="false" sap:content-version="1" href="Aufgaben">
+      <atom:title type="text">Aufgaben</atom:title>
+      <sap:member-title>Aufgaben</sap:member-title>
+    </app:collection>
+    <app:collection sap:label="Status" sap:creatable="false" 
+      sap:updatable="false" sap:deletable="false" sap:pageable="false" 
+      sap:addressable="false" sap:content-version="1" href="Status">
+      <atom:title type="text">Status</atom:title>
+      <sap:member-title>Status</sap:member-title>
+    </app:collection>
+    <app:collection sap:label="Projekt" sap:creatable="false"
+      sap:updatable="false" sap:deletable="false" sap:pageable="false" 
+      sap:addressable="false" sap:content-version="1" href="Projekt">
+      <atom:title type="text">Projekt</atom:title>
+      <sap:member-title>Projekt</sap:member-title>
+    </app:collection>
+    <app:collection sap:label="Kunden" sap:creatable="false"
+      sap:updatable="false" sap:deletable="false" sap:pageable="false" 
+      sap:addressable="false" sap:content-version="1" href="Kunden">
+      <atom:title type="text">Kunden</atom:title>
+      <sap:member-title>Kunden</sap:member-title>
+    </app:collection>
+  </app:workspace>
+  <atom:link rel="self" 
+    href="http://host:port/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/"/>
+  <atom:link rel="latest-version" 
+    href="http://host:port/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/"/>
+</app:service>

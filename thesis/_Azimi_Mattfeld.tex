@@ -5,10 +5,35 @@
 %%------------------------------------------------------------
 
 \usepackage{microtype} % Verhindert under-/overfull hboxes
+\usepackage[nolist,nohyperlinks]{acronym} % Abkürzungen
+\usepackage{booktabs} % Schönere Tabellen \toprule \midrule \bottomrule
+\usepackage{wrapfig} % Grafiken im Rand
+\usepackage{picins} % Grafik neben Text
+\captionsetup[parpic]{
+	skip=20pt
+} % Setzt Abbildungs Caption in die Mitte des Whitespace
+
+\usepackage[outputdir=.texpadtmp]{minted}
+\usepackage{minted} % Schönere Code Listings
+
+
+% !TeX spellcheck = de_DE
+% !TeX encoding = utf8
+% !TeX root = _Azimi_Mattfeld.tex
+% !TeX TXS-program:latex = txs://pdflatex -synctex=1 -shell-escape -interaction=nonstopmode %.tex
+% !BIB program = biber % biber statt bibtex automatisch auswählen
 
 \graphicspath{{images/}}    	% name of directory containing the images
 \logofile{logo_hs_bremerhaven}	% name of PDF, remove or use \logofile{} for no logo
 \bibliography{literatur}  		% name of the BibTeX (.bib) file
+
+% Mehrere Autoren
+\newcommand\autsection[2]{%
+	\section[#1~/ {\normalfont\small\itshape#2}]{#1}}
+
+\newcommand\autsubsection[2]{%
+	\subsection[#1~/ {\normalfont\small\itshape#2}]{#1}}
+
 
 \newcommand{\myTitle}{Testgetriebene Entwicklung und kontinuierliche Integration mit der SAP Mobile Platform\xspace} 
 \newcommand{\myKeywords}{SAPUI5, OData,	Continuous Integration, Test-Driven-Development\xspace}
@@ -16,10 +41,10 @@
 \newcommand{\myDegree}{Bachelor of Science\xspace}
 \newcommand{\myName}{Maximilian Azimi, Jan-Henrich Mattfeld\xspace}
 \newcommand{\myMatrikel}{29287, 29866\xspace}
-\newcommand{\myProf}{mgr\,inż. Alfred Schmidt\xspace}
+\newcommand{\myProf}{Prof. Dr. Karin Vosseberg}
 \newcommand{\myCourse}{\xspace}
 \newcommand{\myOtherProf}{\xspace}
-\newcommand{\mySupervisor}{Dipl.-Wirt.-Inf.\,(FH)\,Christian Distelkamp\xspace}
+\newcommand{\mySupervisor}{mgr\,inż. Alfred Schmidt\xspace}
 \newcommand{\myFaculty}{\xspace}
 \newcommand{\myDepartment}{Fachbereich\,2\xspace}
 \newcommand{\myUni}{Hochschule Bremerhaven\xspace}
@@ -27,6 +52,32 @@
 \newcommand{\myLocation}{Bremerhaven\xspace}
 \newcommand{\myTime}{März 2014\xspace}
 \newcommand{\myVersion}{Version 1.0\xspace}
+
+\begin{acronym}[AJAX]
+	\acro{TDD}{Test Driven Development}
+	\acro{CI}{Continuous Integration}
+	\acro{DOM}{Document Object Model}
+	\acro{AJAX}{Asynchronous JavaScript and XML}
+	\acro{RFC}{Remote Function Call}
+	\acro{BAPI}{Business Application Programming Interface}
+	\acro{SDK}{Software Development Kit}
+	\acro{API}{Application Programming Interface}
+	\acro{OData}{Open Data Protocol}
+	\acro{REST}{Representational State Transfer}
+	\acro{ABAP}{Advanced Business Application Programming}
+	\acro{BOR}{Business Object Repository}
+	\acro{ATDD}{Acceptance Test Driven Development}
+	\acro{BDD}{Behavior Driven Development}
+	\acro{BSP}{Business Server Pages}
+	\acro{IDE}{Integrierte Entwicklungsumgebung}
+	\acro{MDM}{Mobile Device Management}
+	\acro{MAM}{Mobile Application Management}
+	\acro{EMM}{Enterprise Mobility Management}
+	\acro{OSP}{Microsoft Open Specification Promise}
+	\acro{EDM}{Entity Data Model}
+	\acro{MVC}{Model View Controller}
+	\acro{eCATT}{extended Computer Aided Test Tool}
+\end{acronym}
 
 %%%----------------------------------------------------------
 \begin{document}
@@ -43,8 +94,18 @@
 \frontmatter
 \maketitle
 \tableofcontents
-%%%----------------------------------------------------------
 
+
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+
+%\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+%\listoftables
+%
+%\addcontentsline{toc}{chapter}{Listing}
+%\listoflistings
+%%%----------------------------------------------------------
+%\include{autoren}
 \include{kurzfassung}		
 %\include{abstract}			
 
@@ -54,7 +115,7 @@
 
 \include{einleitung}
 \include{grundlagen}
-\include{aforderungsanalyse}
+\include{anforderungsanalyse}
 \include{implementierung}
 \include{schlussfolgerungen}
 

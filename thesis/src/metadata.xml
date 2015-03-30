@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" 
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="Z_ZAV_SCRUM_SRV" xml:lang="de" 
+        xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="Kunden" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Kunde"/>
+        </Key>
+        <Property Name="Kunde" Type="Edm.String" 
+          Nullable="false" MaxLength="10" sap:label="Kunde"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+        <Property Name="Bezei" Type="Edm.String" 
+          Nullable="false" MaxLength="40" sap:label="Bezeichnung"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+        <NavigationProperty Name="Projekte" 
+          Relationship="Z_ZAV_SCRUM_SRV.Assoc_Kunde_Projekt"
+          FromRole="FromRole_Assoc_Kunde_Projekt" 
+          ToRole="ToRole_Assoc_Kunde_Projekt"/>
+      </EntityType>
+      <Association Name="Assoc_Projekt_Sprint" 
+        sap:content-version="1">
+        <End Type="Z_ZAV_SCRUM_SRV.Projekt" 
+          Multiplicity="1" Role="FromRole_Assoc_Projekt_Sprint"/>
+        <End Type="Z_ZAV_SCRUM_SRV.Sprints" 
+          Multiplicity="*" Role="ToRole_Assoc_Projekt_Sprint"/>
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Assoc_Projekt_Sprint">
+            <PropertyRef Name="Kunde"/>
+            <PropertyRef Name="Projektid"/>
+          </Principal>
+          <Dependent Role="ToRole_Assoc_Projekt_Sprint">
+            <PropertyRef Name="Kunde"/>
+            <PropertyRef Name="Projektid"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

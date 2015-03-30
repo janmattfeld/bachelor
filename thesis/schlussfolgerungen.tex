@@ -1,2 +1,161 @@
 \chapter{Schlussfolgerungen}
 \label{cha:Schlussfolgerungen}
+
+\section{Lessons Learned}
+
+\subsection{Architektur-Überlegungen}
+Die Möglichkeiten eine UI5-App zu veröffentlichen und zu nutzen sind vielfältig. Da die geschaffene Infrastruktur meist längerfristig genutzt wird, sollte sie nicht nur zur konkreten App, sondern zur gesamten Firmenstrategie passen. Besonders interessant sind folgende Aspekte:
+
+\begin{enumerate}
+	\item Sind weitere UI5-Apps geplant?
+	\item Werden Fiori-Apps genutzt?
+	\item Existiert bereits eine MDM-Strategie?
+	\item Verteilung und Update der Apps
+	\item Aus welchem Netz erfolgen Zugriffe?
+	\item Welche Authentifizierungsserver werden genutzt?
+	\item Ist ein Offline-Zugriff nötig?
+	\item Sind native Gerätefunktionen gefordert?
+	\item Sollen eigene Plugins genutzt werden?
+	\item Umfang des Brandings/CI
+	\item Art und Standort der Backend-Systeme
+	\item Ist Cloud-Infrastruktur gewünscht?
+\end{enumerate}	
+Diesen Stichpunkten folgend, können die passende Architektur und zugehörige Produkte ausgewählt werden. Zusätzlich ergeben sich Art und Umfang der Teststrategie und besonders der Testwerkzeuge.
+
+\subsection{OData-Service generieren oder selbst implementieren?}
+Bei geeigneten Schnittstellen ist die Generierung von OData-Services tatsächlich sehr gut geeignet, um schnell erste Ergebnisse zu liefern. So entsteht in kürzester Zeit ein funktionsfähiger Service mit grundlegenden Funktionen. Für die Erweiterung und Optimierung von generierten Services ist dennoch ABAP-Programmierung nötig. 
+
+Ohne bereits vorhandene Schnittstellen oder bei komplexen Services empfiehlt es sich, direkt zur Selbstimplementierung des Services zu greifen, auch wenn der Initialaufwand etwas höher ist. 
+
+Die Entwicklung für das SAP-Backend lief, dank umfassender Dokumentation, gut. Der Aufwand steigt erheblich, sobald von Standard-Funktionen abgewichen wird und Customizing notwendig wird. \ZB das Filtern von Substrings bei Nichtbeachtung der Groß- und Kleinschreibung kann nicht über die bereitgestellten Standard-Methoden zum Auslesen von übergebenen OData-Parametern genutzt werden. 
+
+Insgesamt verschiebt sich der Aufwand hin zur Backendprogrammierung. Jede dort implementierte Funktion vereinfacht die Entwicklung der UI5-App. Ein gutes Beispiel sind die Navigationseigenschaften des OData-Modells. Sind sie korrekt implementiert, genügt im Frontend die korrekte Verlinkung, weitere Logik muss nicht implementiert werden.
+
+
+\subsection{Wo ist die aktivste UI5-Community?}
+Mit der Veröffentlichung des UI5-Codes auf GitHub verschieben sich auch die Anlaufstellen für Fehlermeldungen und Hilfestellungen. Während der Kontakt zu den Framework-Entwicklern vor OpenUI5 kaum möglich war, können Fehlermeldungen oder Hinweise nun direkt über das GitHub Issue Management eingestellt werden. Zum Beispiel im Fall des fehlerhaften \textit{karma-openui5} Plugins hat sich so ein interessanter Dialog ergeben. Der veröffentlichte Code gewährt außerdem Einblicke in zukünftige Best Practices in Form neuer Beispiel-Apps und den zugehörigen Testfällen.
+
+Das SAP Community Network (SCN)\footnote{\url{http://scn.sap.com/community/developer-center/front-end}} ist weiterhin die wertvollste Ressource für Blogs und umfangreiche Tutorials. Auch komplexe Themen, wie das Kapsel SDK, werden mit Beispielen eingeführt und erleichtern den Entwicklungsstart ungemein. Daneben könnte StackOverflow als renomiertes Programmier-Forum nützlich werden. Die Zahl der Posts unter den Tags \textit{openui5} und \textit{sapui5}\footnote{\url{http://stackoverflow.com/questions/tagged/sapui5}} nimmt ständig zu.
+
+\subsection{Infrastruktur als Code}
+Das Prinzip \textit{Infrastructure as Code} ist nicht nur essenziell für die verteilte testgetriebene Entwicklung, es wird durch den hauptsächlichen Einsatz von JavaScript auch erheblich gefördert. Die gesamte Toolchain von Task Runner über Paketmanager und Testtreiber wird automatisiert aus den Konfigurationsdateien wiederhergestellt. 
+
+Selbst beim erstmaligen Herunterladen aus der Versionskontrolle ist das Projekt in IDE oder CI-Server mit zwei Befehlen einsatzbereit.
+Auf dem CI-Server machen wir uns diese Eigenschaft zunutze, indem das Projektverzeichnis vor jedem Build neu aufgebaut wird. Mögliche Nennwirkungen werden vermieden und die Lauffähigkeit der aktuell eingecheckten Infrastruktur ist sichergestellt.
+
+\subsection{Alternative IDE prüfen}
+Auch wenn SAP Eclipse als Standard-Entwicklungsumgebung für fast alle Produkte präsentiert -- Für eine UI5-Entwicklung auf JavaScript-Basis gibt es interessante Alternativen mit hervorragender Testintegration. 
+
+Eclipse ist keine beliebte Webentwicklungsumgebung, laut SCN\footnote{\url{http://scn.sap.com/community/developer-center/front-end/blog/2014/09/22/configuring-jetbrains-webstorm-for-ui5-development}} auch nicht innerhalb der SAP. Hinzu kommt die neue SAP Web IDE als Konkurrenz und langfristige Ablösung einer lokalen Eclipse-Installation. Ihr erster Eindruck ist gut: Die Umgebung ist sofort einsatzbereit, reagiert schnell auf Eingaben, bringt aktuelle, Fiori-kompatible Templates mit und integriert statische Code-Analysen. Einzig die Entwicklung von hybriden Apps wurde nicht vereinfacht, die CI-Integration ist noch gar nicht möglich.
+
+Je nach eigenen Vorlieben und Projektvorgaben kann WebStorm eine gute Alternative zu Eclipse und der Web IDE sein. Genauso wie Letztere ist WebStorm schnell einsatzbereit und arbeitet zügig. Zusätzlich können auch Unit- und Akzeptanztests ausgeführt und Ergebnisse visualisiert werden. Paketmanager sind integriert und auf Wunsch läuft die gesamte CI-Toolchain lokal in der IDE. Gerade in Hinblick auf TDD ist die Benutzererfahrung mit WebStorm wesentlich besser.
+
+\subsection{Testmethoden kombinieren}
+TDD stellt sicher, dass der Code richtig geschrieben wurde, während BDD dafür sorgt, dass es auch der richtige Code ist.
+Ergänzend haben sich explorative Tests als nützlich erwiesen. 
+
+Diese sollten allerdings nicht nur spontan, sondern in Form bestimmter Szenarien oder Aufträge erfolgen. Ein Auftrag könnte lauten: \textit{Überprüfe die Navigation in der App}. Sollten hierbei neue Fehlerwirkungen auftreten, schreiben wir einen entsprechenden Testfall und korrigieren den Code erst danach. Durch automatische Regressionstests wird der Fehler zukünftig vermieden.
+
+\subsection{Tests gezielt einsetzen -- Nicht doppelt testen}
+Durch die Offenlegung des UI5-Quellcodes auf GitHub ist die testorientierte Entwicklung seitens SAP deutlich geworden. Das gesamte Framework ist durch zahlreiche Unit- und Akzeptanztests geprüft. Gleiches gilt für die zugrundeliegenden Basis-Frameworks wie jQuery und QUnit. 
+
+Probehalber haben wir die UI5-Tests ausgeführt -- Der mehr als 15 Minuten dauernde Testlauf endete mit mehreren Fehlermeldungen und Warnungen. Was bedeutet das für unser Projekt?
+
+\begin{enumerate}
+	\item Auch UI5 ist natürlich nicht fehlerfrei.
+	\item Keiner der fehlgeschlagenen Testfälle ist für uns relevant.
+	\item Teilweise sind noch nicht implementierte Funktionen betroffen.
+	\item Der gesamte Testlauf dauert sehr lange.
+	\item Die Ergebnisanalyse ist extrem aufwändig.
+\end{enumerate}
+Wir konzentrieren uns daher auf Tests eigener Funktionen.
+
+\subsection{Statische Analyse differenziert betrachten}
+Die Bereitstellung offizieller UI5-ESLint-Regeln zur statischen Codeanalyse ist der richtige Schritt, um die Code-Qualität zu verbessern und den gleichen Code-Stil projektübergreifend durchzusetzen. 
+
+Das aktuelle UI5-Framework genügt diesen selbst gesetzten Anforderungen jedoch nicht: Eine Überprüfung mit ESLint zeigt so viele Warnungen, dass mit einem kompletten Refactoring auf absehbare Zeit nicht zu rechnen ist. Daraus folgern wir für unsere Projekt:
+\begin{enumerate}
+	\item Die genutzten Frameworks von der statischen Analyse ausschließen.
+	\item Für zukünftige Kompatibilität eigenen Code regelkonform gestalten.
+\end{enumerate}
+Bei der Übernahme einer bereits vorhandenen Codebasis ohne fest definierte Regeln kann kaum ein bestimmtes Regelset durchgesetzt werden. Die Änderungen sind oft viel zu umfangreich und kommen einer Neuprogrammierung nahe. Stattdessen empfiehlt sich die Suche nach einem Stil der möglichst genau dem des vorhandenen Codes entspricht und eine Anpassung ermöglicht.
+
+Im Notfall ist die Gewichtung der Fehler per Regel herunterzusetzen oder bestimmte Optionen ganz zu deaktivieren. Neue Fehler gehen sonst im Protokoll unter. Eine statische Analyse die standardmäßig viele Warnungen ausgibt, stumpft ab und bringt keinen Mehrwert.
+
+\subsection{Code Coverage ist nicht alles}
+Die Code Coverage ist zwar leicht zu messen, aber keine geeignete Metrik um das erfolgreiche Testende festzustellen. Stattdessen liefert sie Hinweise auf ungenutzten Code, der durch ein Refactoring entfernt werden kann.
+
+Für die Wartbarkeit haben sich die Plato-Metriken als interessant herausgestellt. Sie analysieren die Komplexität des Codes und decken Modularisierungspotential auf.
+
+%\subsection{Tests modularisieren}
+%OPA5-Templates anlegen und Tests modularisieren % Gleiche Standards wie Code
+%Vergleich mit Jubula % TEstdaten, graifschie Modularisierung, Generalisierung, (Komplizierter mit OPA5, einzelne JS files, selber Überblick behalten dafür Interface schnelelr (texteditor)), 
+
+\section{Ausblick}
+Es bleibt ein breit gefächertes Integrationspotenzial. Während die Arbeit eine Einführung in TDD und CI mit UI5 darstellt, bleiben weitere Funktionen, App-Architekturen und Testwerkzeuge die, je nach Projektart und Größe, weiter untersucht werden sollten.
+
+\subsection{\emph{Echte} Unit-Tests}
+Wie bereits festgestellt, handelt es sich bei unserer beschriebenen Vorgehensweise aktuell nicht um klassisches \ac{TDD} mit Unit-Tests -- Vielmehr nutzen wir Akzeptanztest.
+
+Dieses Vorgehen hat sich bei der kleinen Projektgröße und dem geringen Umfang der App bewährt. Sobald eigene Funktionen in der App implementiert werden, zum Beispiel Formatter, werden Unit-Tests benötigt.
+
+Mit der aktuellen Architektur haben wir alle Grundlagen dafür gelegt. QUnit als Testframework ist bereits UI5-Bestandteil und wird von unserem Testtreiber unterstützt. Auch die übrige CI-Toolchain ist auf den Einsatz vorbereitet.
+%
+%\subsection{Weitere App-Architekturen}
+%SAP-App-Architekturen testen, siehe Überblick. 
+
+\subsection{Native Funktionen testen}
+Zukünftige App-Versionen werden native Geräte-Funktionen nutzen. Auch diese müssen in die Teststrategie einbezogen und automatisch geprüft werden. Aktuell gibt es für einen Test ohne Mobilgeräte oder Emulatoren folgende Möglichkeiten:
+
+\begin{itemize}
+	\item Browser-Plugins\footnote{\url{https://github.com/pbernasconi/chrome-cordova}}
+	\item Mock-Frameworks\footnote{\url{https://github.com/ecofic/ngCordovaMocks}}
+	\item Cordova-Browser-Plattform\footnote{\url{https://github.com/apache/cordova-browser}}
+\end{itemize}
+Cordova-Browser-Plugins und -Mock-Frameworks arbeiten nach dem gleichen Schema: Sie bieten einen Mock der cordova.js-API an. Dieser wird entweder direkt in den Testressourcen eingebunden oder in eine laufende Browsersitzung injiziert. API-Aufrufe liefern vordefinierte Werte oder zeigen einen Dialog zur Eingabe der Testdaten.
+
+Die vielversprechendste Möglichkeit ist die neue, offizielle Cordova-Platt\-form \textit{Browser}. Sie ist seit 2014 als Beta-Version verfügbar und ermöglicht einen problemlosen Betrieb von Hybrid-Apps in Desktop-Umgebungen. Das \textit{deviceready}-Event wird automatisch abgesetzt und Standard-APIs wie Kamera und GPS stehen zur Verfügung. Aktuell ist die Einrichtung allerdings noch aufwändig.
+
+\subsection{Tiefere SMP-Integration}
+Aktuell nutzen wir die SAP Mobile Platform in Form der HANA Cloud Platform mobile services: Sie stellt unseren OData-Service außerhalb des Intranets bereit. Zusammen mit den Cordova-Plugins des Kapsel-SDKs bietet es noch mehr Möglichkeiten\footnote{\url{http://scn.sap.com/docs/DOC-49592}}:
+
+\begin{itemize}
+	\item Single Sign-on
+	\item OData-Offline-Funktionen
+	\item Push-Nachrichten
+	\item App-Updates
+	\item Statistiken
+\end{itemize}
+Gerade Single-sign on ist für eine zukünftige Mobil-Strategie auf UI5-Basis Voraussetzung, um mehrere Apps komfortabel nutzbar zu machen. Statt des SAP-Kontos als Fiori-Standard, können über die Mobile Platform auch andere Authentifizierungsstrukturen eingebunden werden, zum Beispiel ein Active Directory.
+
+Offline-Funktionen stellen für die App-Entwicklung eine große Herausforderung dar. Die Eigenimplementierung von Synchronisierungsfunktionen ist komplex und damit fehleranfällig. Hier unterstützt die Kombination aus SAP Mobile Platform und Kapsel-Plugin -- Sie erweitert auch vorhandene OData-Services und UI5-Apps unter iOS und Android um Offline-Funktionen. Gleiches gilt für Push-Nachrichten.
+
+Automatische App-Updates können für bereits installierte Apps über die Mobile Platform veröffentlicht werden. Dies kann allerdings nur eine Ergänzung zu einem vorhandenen Mobile Device Management wie Afaria sein. Nur darüber gelingt die Erstverteilung.
+
+\subsection{Fiori Deployment}
+Durch die strikte Einhaltung der UI5-Best-Practices eignet sich die App auch zur Veröffentlichung über Fiori: Die Modularisierung ermöglicht einen Betrieb der App allein über das Laden der \textit{Component.js}. Ob dies über eine HTML-Datei oder im Fiori-Launchpad erfolgt, spielt keine Rolle. Ressourcen und Navigations-Routen der App sind gekapselt und garantieren einen konfliktfreien Betrieb als Fiori-App.
+
+In diesem Zusammenhang muss die parallele Veröffentlichung über das Fiori-Launchpad als BSP weiter geprüft werden. Ein manueller Upload der App widerspricht dem CI-Gedanken. Der ABAP Team Provider (Eclipse) oder das Aufrufen der Transaktion \textit{/UI5/UI5\_REPOSITORY\_LOAD} scheiden als Werkzeuge aus. Da der Baustein remotefähig ist, könnte eine CI-Integration über einen RFC erfolgen.
+
+\subsection{Continous Delivery mit Afaria}
+Entwicklungs- und Testprozess sind automatisiert, doch wie kommt die Anwendung danach auf die mobilen Geräte der Mitarbeiter?
+
+SAP bietet mit Mobile Secure eine \ac{EMM}-Lösung in der Cloud. Diese stellt durch die Integration von SAP Afaria unter anderem \ac{MDM} zur Verwaltung von mobilen Geräten im Unternehmen bereit. Außerdem werden per \ac{MAM} Anwendungen im firmeninternen App Store über den \textit{SAP Mobile Place} veröffentlicht. 
+
+Durch Schnittstellen lassen sich die Installationspakete der Apps direkt aus der CI-Toolchain im \textit{SAP Mobile Place} bereitstellen. Die Mitarbeiter oder auch Geschäftspartner können Anwendungen anschließend aus dem Anwendungskatalog auswählen und installieren. Auf Geräten, die durch das \ac{MDM} verwaltet werden, ist außerdem eine automatische Installation und Aktualisierung der Anwendungen möglich. Alternativ ist SAP Afaria auch als Stand-Alone-Lösung einsetzbar\footnote{\url{http://scn.sap.com/docs/DOC-62378}}. 
+
+\subsection{eCATT-Integration}
+Das Testen der Funktionsbausteine, sowie der OData-Services wurde in diesem Projekt aus Zeitgründen nicht automatisiert. Dies würde sich über das \ac{eCATT} realisieren lassen. 
+
+Die Funktionen zum Testen von Funktionsbausteinen ist standardmäßig in \ac{eCATT} integriert. Automatisierte Tests von OData-Services benötigen zusätzlich die \textit{Gateway Test APIs}, welche im SCN veröffentlicht wurden\footnote{\url{http://scn.sap.com/community/gateway/blog/2013/11/27/ecatt-based-test-automation-for-odata-services-available}}.
+
+\section{Bewertung und Herausforderungen}
+Ziel der Arbeit war ein bereits vorhandenes ABAP-Altsystem mit einer neuen UI5-App benutzerfreundlicher zu gestalten. Wir haben dabei die neue SAP-Mobile-Strategie eingeschätzt und die entsprechenden Produkte kennengelernt. Seit der Sybase-Übernahme durch SAP wurde die ehemalige Sybase Unwired Platform zur SAP Mobile Platform weiterentwickelt -- Mittlerweile auch als Mietangebot in Form der Hana Cloud Platform mobile services. Überhaupt existiert nun ein großes Ökosystem zum Thema Mobile Devices das \zB um MDM-Lösungen erweitert wurde. In dieser Arbeit haben wir die gängigste Kombination aus universeller UI5-App und SAP Gateway umgesetzt.
+
+Gegenüber älteren Frameworks wie jQuery Mobile ist UI5 ein vollwertiges, offenes Businessframework. Übliche Konzepte wie Routing, Internationalisierung und Modularisierung heben es auf eine Stufe mit großen Alternativen wie Sencha Ext JS. Die typische Schnelllebigkeit anderer JavaScript-Frameworks lässt sich auch hier beobachten: Die eigenen Codestyle-Vorgaben werden noch nicht eingehalten und sind eher Ziel, als aktueller Standard. Die interne App-Struktur hat mehrere grundlegende Änderungen durchlaufen, die Best Practices werden das nächste Mal mit dem kommenden Release 1.28 umfassend geändert.
+
+Das Konzept des SAP Gateways als Schnittstelle zwischen Backend und Frontend überzeugt. Die Schwierigkeit bei der Erstellung von OData-Services steigt mit der Komplexität. Als Frontend-Entwickler sind tatsächlich keine SAP-Kentnisse notwendig. OData als Protokoll ist einfach und schnell zu verstehen. Besonders die Navigationseigenschaften zwischen den einzelnen Entitäten vereinfachen die Implementierung der Navigation in der Anwendung.
+
+UI5 selbst wird mit großer Rücksicht auf Testen entwickelt, die umfangreiche Testsuite verdeutlicht dies. Schwieriger hat sich die Integration in eine CI-Toolchain erwiesen. Das Karma-Plugin ist noch fehlerhaft und benötigt einen Workaround. Best Practices zum Einsatz von Akzeptanztests mit OPA5 gibt es noch nicht, wir haben sie selbst erarbeitet. Im Vergleich zu Tools wie Jubula ist die Modularisierung aufwändiger, in großen Projekten könnte der Überblick leiden. Die fehlenden Erfahrungen sind kein UI5-spezifisches Problem: Die Kombination aus JavaScript, testgetriebener Entwicklung und Geschäftsanwendungen verändert sich schnell und wird seit einiger Zeit verstärkt mit eigener Literatur wie \cite{Fain2014}, \cite{Wrobel2015} und \cite{Springer2015} behandelt.
+
+Insgesamt haben wir eine effiziente CI-Toolchain auf OpenSource-Basis etabliert, die wir auch in zukünftigen Projekten nutzen werden. Der testgetriebene Ansatz war aufwändig. Durch die Schaffung universeller Templates für die Akzeptanztests und der gesamten Projektstruktur werden kommende Entwicklungen deutlich weniger Aufwand erfordern. Wir werden diesen Ansatz weiterführen, da er automatische Regressionstests auf vielen verschiedenen Plattformen parallel erlaubt.

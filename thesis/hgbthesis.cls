@@ -148,13 +148,13 @@
 	\normalfont
   \setlength{\unitlength}{1cm}
 	% default: 5cm, mehr Platz für Logo
-	\parbox[c][4cm][c]{12cm}{\centering\LARGE\bf%
+	\parbox[c][4cm][c]{11cm}{\centering\LARGE\bf%
     \setlength{\baselineskip}{25pt}%
     \@title}
 	\vskip 15mm%
-	{\large\sc\@author}%
-	\vskip 15mm%
-	\makelogo%
+	{\large\sc Maximilian Azimi (29287)\\Jan-Henrich Mattfeld (29866)}%
+%	\vskip 15mm%
+%	\makelogo%
 	\vskip 15mm%
 	{\Large B\,A\,C\,H\,E\,L\,O\,R\,A\,R\,B\,E\,I\,T}%
 	\vskip 4mm%
@@ -166,7 +166,11 @@
 	\vskip 4mm%
 	{\large in \@studienort}%
 	\vskip 16mm%
-	{\large im \monthname[\value{@abgabemonat}] \arabic{@abgabejahr}}%
+	{\large am \arabic{@abgabetag}. \monthname[\value{@abgabemonat}] \arabic{@abgabejahr}}%
+	\vskip 16mm%
+	{\large Erstprüfer: \mySupervisor}
+	\vskip 4mm%
+	{\large Zweitprüferin: \myProf}%
 \end{center}%
   \vfil%
 \end{german}
@@ -381,11 +385,8 @@ im\\
 \begin{german}
 \chapter{Erklärung}
 \noindent
-%Standardfassung der FH-OÖ ab 04.04.2012:
-Wir erklären eidesstattlich, dass wir die vorliegende Arbeit selbstständig und ohne fremde Hilfe verfasst, 
-andere als die angegebenen Quellen nicht benutzt und die den benutzten Quellen entnommenen Stellen als 
-solche gekennzeichnet haben. Die Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen 
-Prüfungsbehörde vorgelegt.
+%Standardfassung der HS BHV:
+Wir versichern, dass wir die Arbeit selbstständig verfasst und nur die angegebenen Quellen und Hilfsmittel benutzt haben. Die einzeln zu verantwortenden Teile haben wir im Inhaltsverzeichnis entsprechend gekennzeichnet.
 \par
 \vspace{10mm}
 \noindent
