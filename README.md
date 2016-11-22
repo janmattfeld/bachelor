@@ -1,7 +1,12 @@
-# ScrumUI5
+# Test-driven Development and Continous Integration with Hybrid SAP UI5 Apps
 
-[![Build Status](http://lan.az-n.de:8080/buildStatus/icon?job=scrumUI5)](http://lan.az-n.de:8080/job/scrumUI5/)
+Mit aktuellen Tools und Frameworks wie SAPUI5, Gateway und Mobile Platform bietet die
+SAP neue Wege zur Entwicklung von geräteübergreifenden Anwendungen.
+Bestehende Individualsoftware auf ABAP-Basis wollen wir mit deren Hilfe mobil nutzbar machen.
 
-SAP UI5 Scrum Board
+Gleichzeitig automatisieren wir den testgetriebenen Entwicklungs- und
+Auslieferungsprozess. Wir evaluieren entsprechende Open Source Tools und geben Hinweise auf aktuelle Best Practices. Diese umfasen die App-Entwicklung genauso wie OData-Services und ABAP-Backend.
 
-Copyright (c) 2015 abat AG, All Rights Reserved
+![CI-Toolchain](./thesis/images/ci-toolchain.gif)
+
+![WebStorm for CI](./thesis/images/webstorm.png)
