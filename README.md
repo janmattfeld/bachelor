@@ -9,4 +9,4 @@ Auslieferungsprozess. Wir evaluieren entsprechende Open Source Tools und geben H
 
 ![CI-Toolchain](./thesis/images/ci-toolchain.gif)
 
-![WebStorm for CI](./thesis/images/webstorm.png)
+![WebStorm for CI](./thesis/images/WebStorm.PNG)
