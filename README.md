@@ -1,4 +1,4 @@
-# Test-driven Development and Continous Integration with Hybrid SAP UI5 Apps
+# Test-driven Development and Continuous Integration with Hybrid SAP UI5 Apps
 
 Mit aktuellen Tools und Frameworks wie SAPUI5, Gateway und Mobile Platform bietet die
 SAP neue Wege zur Entwicklung von geräteübergreifenden Anwendungen.
