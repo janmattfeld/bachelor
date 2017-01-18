@@ -34,7 +34,7 @@ module.exports = function (config) {
 					config: {
 						autoRespond: true
 					},
-					rootUri: 'http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/',
+					rootUri: 'http://user:pass@uri:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/',
 					metadataURL: '/base/test/service/metadata.xml',
 					mockdataSettings: '/base/test/service'
 				}

@@ -4,7 +4,7 @@ sap.ui.define([ "sap/ui/core/util/MockServer" ], function(MockServer) {
 
 	return {
 
-		_sServiceUrl : "http://jam:Nlcfwv3@abat-ect.bremen.abat.de:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/",
+		_sServiceUrl : "http://user:pass@uri:8000/sap/opu/odata/sap/Z_ZAV_SCRUM_SRV/",
 		_sModulePath : "de.abat.scrumui5.service",
 
 		/**
